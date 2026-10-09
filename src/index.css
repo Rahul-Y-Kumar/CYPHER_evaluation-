@@ -1,0 +1,749 @@
+/* ==========================================================================
+   CYPHER 4.0 — COSMIC NEO-BRUTALIST DESIGN SYSTEM
+   Theme: COSMIC VOID + NEO-BRUTALISM + RETRO-FUTURISTIC TERMINAL
+   ========================================================================== */
+
+:root {
+  /* Core Color System Tokens */
+  --ink: #05060B;
+  --paper: #0B1030;
+  --bg-dark: #000F1B;
+  --white: #F5F4ED;
+  --muted: #9EA1BA;
+  --acid: #EAFF00;
+  --purple: #7B28BD;
+  --cyan: #16D5D0;
+  --line: rgba(245, 244, 237, 0.16);
+  --line-strong: rgba(245, 244, 237, 0.35);
+
+  /* Functional Accents */
+  --success: #16D5D0;
+  --warning: #EAFF00;
+  --danger: #FF3366;
+  --info: #7B28BD;
+
+  /* Hard-edge Brutalist Shadows (NO BLURS) */
+  --shadow-xs: 2px 2px 0 #05060B;
+  --shadow-sm: 4px 4px 0 #05060B;
+  --shadow-md: 6px 6px 0 #05060B;
+  --shadow-lg: 8px 8px 0 #05060B;
+  --shadow-xl: 12px 12px 0 #05060B;
+  
+  --shadow-acid-sm: 3px 3px 0 #EAFF00;
+  --shadow-acid: 5px 5px 0 #EAFF00;
+  --shadow-cyan-sm: 3px 3px 0 #16D5D0;
+  --shadow-cyan: 5px 5px 0 #16D5D0;
+  --shadow-purple: 5px 5px 0 #7B28BD;
+  --shadow-white: 4px 4px 0 #F5F4ED;
+
+  /* Typography Fonts */
+  --font-display: 'Anton', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Martian Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing and Radius */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  selection-background-color: var(--acid);
+  selection-color: var(--ink);
+}
+
+::selection {
+  background-color: var(--acid);
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Typography Utility Classes
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 0.03em;
+  word-spacing: 0.08em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  word-spacing: 0.16em;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.display-hero {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.5vw, 6.8rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  word-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.display-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: 0.04em;
+  word-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.display-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  word-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Technical / Monospace Label */
+.tech-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tech-label-cyan {
+  color: var(--cyan);
+}
+
+.tech-label-acid {
+  color: var(--acid);
+}
+
+/* ==========================================================================
+   Background System & Grid Overlays
+   ========================================================================== */
+.cosmic-void-bg {
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(123, 40, 189, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 60%, rgba(22, 213, 208, 0.1), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 10% 90%, rgba(234, 255, 0, 0.05), transparent 70%),
+    var(--bg-dark);
+}
+
+.cosmic-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(245, 244, 237, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 244, 237, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.cosmic-grid-dense {
+  background-image: 
+    linear-gradient(to right, rgba(245, 244, 237, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 244, 237, 0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ==========================================================================
+   Brutalist Components & Buttons
+   ========================================================================== */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-xs);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.12s cubic-bezier(0.2, 0, 0, 1);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 1px 1px 0 var(--ink) !important;
+}
+
+/* Primary CTA - Acid Yellow */
+.btn-acid {
+  background-color: var(--acid);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-acid:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+  background-color: #f1ff33;
+}
+
+/* Secondary CTA - Cyan */
+.btn-cyan {
+  background-color: var(--cyan);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-cyan:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+  background-color: #38e4df;
+}
+
+/* Secondary Accent - Purple */
+.btn-purple {
+  background-color: var(--purple);
+  color: var(--white);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-purple:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+  background-color: #8f38d6;
+}
+
+/* Brutalist Outline Button */
+.btn-outline {
+  background-color: var(--paper);
+  color: var(--white);
+  border: 2px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline:hover {
+  border-color: var(--white);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-cyan-sm);
+  color: var(--cyan);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid transparent;
+  box-shadow: none;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(245, 244, 237, 0.08);
+  border-color: var(--line);
+}
+
+/* Brutalist Cards */
+.brutal-card {
+  background-color: var(--paper);
+  border: 2px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-xs);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  position: relative;
+}
+
+.brutal-card:hover {
+  border-color: var(--line-strong);
+}
+
+.brutal-card-hover:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--cyan);
+}
+
+.brutal-card-ink {
+  background-color: var(--ink);
+  border: 2px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.brutal-card-acid {
+  background-color: var(--paper);
+  border: 2px solid var(--acid);
+  box-shadow: var(--shadow-acid);
+}
+
+/* Status Badges */
+.brutal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-xs);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-xs);
+}
+
+.brutal-badge-acid {
+  background-color: var(--acid);
+  color: var(--ink);
+}
+
+.brutal-badge-cyan {
+  background-color: var(--cyan);
+  color: var(--ink);
+}
+
+.brutal-badge-purple {
+  background-color: var(--purple);
+  color: var(--white);
+}
+
+.brutal-badge-dark {
+  background-color: var(--ink);
+  color: var(--white);
+  border-color: var(--line);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ink);
+  border-left: 2px solid var(--line);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
+
+/* ==========================================================================
+   Live Ticker Animation
+   ========================================================================== */
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.live-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 28s linear infinite;
+}
+
+.live-ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
+   Button System & Micro-Interactions
+   ========================================================================== */
+.neo-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-none);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  user-select: none;
+  white-space: nowrap;
+  transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.1s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Primary Acid Button */
+.neo-btn-primary {
+  background-color: var(--acid);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-btn-primary:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.neo-btn-primary:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 var(--ink);
+}
+
+/* Secondary Purple Button */
+.neo-btn-secondary {
+  background-color: var(--purple);
+  color: var(--white);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-btn-secondary:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.neo-btn-secondary:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 var(--ink);
+}
+
+/* Cyan Button */
+.neo-btn-cyan {
+  background-color: var(--cyan);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-btn-cyan:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.neo-btn-cyan:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 var(--ink);
+}
+
+/* Danger Button */
+.neo-btn-danger {
+  background-color: var(--danger);
+  color: var(--white);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-btn-danger:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.neo-btn-danger:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 var(--ink);
+}
+
+/* Outline Button */
+.neo-btn-outline {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-btn-outline:hover {
+  background-color: rgba(245, 244, 237, 0.08);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.neo-btn-outline:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 var(--ink);
+}
+
+/* Ghost Button */
+.neo-btn-ghost {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid transparent;
+  box-shadow: none;
+}
+
+.neo-btn-ghost:hover {
+  background-color: rgba(245, 244, 237, 0.08);
+  border-color: var(--line);
+}
+
+/* Dual-Line Text Roll Micro-Interaction */
+.btn-roll-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1.25em;
+  line-height: 1.25em;
+  vertical-align: middle;
+}
+
+.btn-roll-text {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.neo-btn:hover .btn-roll-text {
+  transform: translateY(-50%);
+}
+
+.btn-roll-line {
+  display: block;
+  height: 1.25em;
+  line-height: 1.25em;
+}
+
+/* Arrow Hover Interaction */
+.btn-arrow-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.15em;
+  transition: transform 0.2s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.neo-btn:hover .btn-arrow-icon {
+  transform: translate(2px, -2px) rotate(45deg);
+}
+
+/* ==========================================================================
+   NeoCard Base & Variants
+   ========================================================================== */
+.neo-card {
+  position: relative;
+  background: rgba(5, 6, 11, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid var(--line);
+  box-shadow: 4px 4px 0 var(--ink);
+  border-radius: var(--radius-none);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.neo-card-default {
+  background: rgba(5, 6, 11, 0.45);
+  border-color: var(--line);
+  color: var(--white);
+}
+
+.neo-card-featured {
+  background: var(--paper);
+  border-color: var(--cyan);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.neo-card-acid {
+  background: var(--acid);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-card-purple {
+  background: var(--purple);
+  color: var(--white);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-card-cyan {
+  background: var(--cyan);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-card-danger {
+  background: var(--danger);
+  color: var(--white);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.neo-card-outlined {
+  background: transparent;
+  border: 2px solid var(--white);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* Animations & Motion */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+@keyframes orbitRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.scanline-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.15;
+}
+
+.scanline-bar {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: scanline 8s linear infinite;
+}
+
+/* ==========================================================================
+   Scroll Reveal & Parallax Decorative System
+   ========================================================================== */
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: revealUp 0.5s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+.reveal-delay-100 { animation-delay: 100ms; }
+.reveal-delay-200 { animation-delay: 200ms; }
+.reveal-delay-300 { animation-delay: 300ms; }
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Decorative Cosmic Parallax Elements */
+.cosmic-orbit-decorative {
+  pointer-events: none;
+  animation: orbitRotate 120s linear infinite;
+  transform-origin: center;
+}
+
+/* ==========================================================================
+   Dashboard & Brutalist Tables
+   ========================================================================== */
+.brutal-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  border: 2px solid var(--line);
+}
+
+.brutal-table th {
+  background-color: var(--ink);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+}
+
+.brutal-table td {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  font-size: 0.82rem;
+}
+
+.brutal-table tr:hover {
+  background-color: rgba(245, 244, 237, 0.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .live-ticker-track {
+    animation: none !important;
+  }
+  .cosmic-orbit-decorative {
+    animation: none !important;
+  }
+  .reveal-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Responsive Containers */
+.container-custom {
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
