@@ -244,6 +244,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab }) => {
                 {[
                   { label: 'About', target: 'home' },
                   { label: 'Problem Statements', target: 'problems' },
+                  { label: 'Resources & Datasets', target: 'resources' },
                   { label: 'Live Leaderboard', target: 'results' },
                   { label: 'Evaluation Protocol', target: 'how-it-works' },
                   { label: 'Experience & Schedule', target: 'home' },

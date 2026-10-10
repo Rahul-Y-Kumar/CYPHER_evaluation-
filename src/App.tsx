@@ -5,6 +5,7 @@ import { CosmicGrid } from './components/background/CosmicGrid';
 import { Navbar } from './components/navigation/Navbar';
 import { Footer } from './components/navigation/Footer';
 import { BootLoader } from './components/ui/BootLoader';
+import { DatasetAnnouncement } from './components/ui/DatasetAnnouncement';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -52,6 +53,11 @@ export function App() {
       <Navbar
         activeTab={activeTab}
         onSelectTab={handleSelectTab}
+      />
+
+      {/* 3.5. Official Dataset Release Announcement Banner & Popup */}
+      <DatasetAnnouncement
+        onNavigateToDatasets={() => handleSelectTab('resources')}
       />
 
       {/* 4. Main View Area */}

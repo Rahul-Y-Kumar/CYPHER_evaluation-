@@ -1,0 +1,54 @@
+component,description,stock_on_hand,unit_cost
+C-101,Axle Shaft A,0,1623
+C-105,Axle Shaft B,9927,766
+C-106,Bearing Hub A,2960,1002
+C-110,Bearing Hub B,8029,1477
+C-115,Brake Drum A,121,516
+C-116,Brake Drum B,166,2166
+C-118,King Pin Set,150,410
+C-122,Wheel Stud B,1,889
+C-127,Seal Kit A,13,1634
+C-128,Seal Kit B,5,416
+C-133,Differential Gear A,25294,2226
+C-136,Differential Gear B,6,2158
+C-138,Crown Wheel A,3001,162
+C-141,Crown Wheel B,11670,446
+C-145,Pinion A,2255,275
+C-150,Oil Seal Kit,1900,180
+C-152,Spider Gear A,120,1535
+C-154,Spider Gear B,7267,2265
+C-159,Housing Casting A,1333,2099
+C-162,Housing Casting B,3088,996
+C-165,Bolt Set A,2244,1241
+C-167,Bolt Set B,4278,697
+C-168,Spacer A,11627,1368
+C-169,Spacer B,20679,775
+C-173,Lock Nut A,11138,2029
+C-178,Lock Nut B,1028,1993
+C-179,Retainer Plate A,112,1845
+C-182,Retainer Plate B,184,311
+C-184,Oil Seal A,147,810
+C-185,Oil Seal B,12952,2006
+C-190,ABS Ring A,6344,1293
+C-195,ABS Ring B,1180,2091
+C-199,Knuckle A,6693,116
+C-201,Knuckle B,172,795
+C-204,King Pin A,4637,1465
+C-207,Stub Shaft Forged,2500,620
+C-211,Bushing A,13496,86
+C-213,Bushing B,1714,838
+C-215,Grease Nipple A,78,283
+C-218,Grease Nipple B,1501,2128
+C-223,Shim Pack A,2821,175
+C-228,Shim Pack B,11,1438
+C-229,Circlip A,84,614
+C-231,Circlip B,1597,994
+C-234,Washer Set A,110,97
+C-238,Washer Set B,3640,352
+C-243,Backing Plate A,6076,1325
+C-244,Backing Plate B,6540,1359
+C-114,Bearing Hub HD,320,1450
+C-114A,Bearing Hub HD (alt. vendor),150,1566
+C-330,Legacy Housing Casting,3000,3100
+C-150B,Oil Seal Kit (approved alt.),1200,192
+C-412,Crown Wheel & Pinion – Heavy,300,7800

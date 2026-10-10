@@ -28,11 +28,10 @@ export const HomePage: React.FC<HomePageProps> = ({
   onSelectTab,
   onSelectProblem,
 }) => {
-  // Countdown Timer State - Next Day 10:00 AM
+  // Countdown Timer State - Today 10:00 AM
   const [timeLeft, setTimeLeft] = useState(() => {
     const now = new Date();
     const target = new Date();
-    target.setDate(now.getDate() + 1);
     target.setHours(10, 0, 0, 0);
     const diff = Math.max(0, target.getTime() - now.getTime());
     return {
@@ -59,7 +58,6 @@ export const HomePage: React.FC<HomePageProps> = ({
     const calculateTime = () => {
       const now = new Date();
       const target = new Date();
-      target.setDate(now.getDate() + 1);
       target.setHours(10, 0, 0, 0);
       const diff = Math.max(0, target.getTime() - now.getTime());
       setTimeLeft({
@@ -225,6 +223,14 @@ export const HomePage: React.FC<HomePageProps> = ({
                   icon={<Layers size={18} />}
                 >
                   LIVE LEADERBOARD ↗
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => onSelectTab('resources')}
+                >
+                  DATASETS & RESOURCES
                 </Button>
               </div>
 
@@ -1165,7 +1171,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </h2>
 
             <p style={{ color: 'var(--ink)', opacity: 0.85, maxWidth: '640px', margin: '0 auto 2.5rem', fontSize: '1.05rem', lineHeight: '1.6', fontWeight: 600 }}>
-              Lock in your problem statement, collaborate with on-floor mentors, and prepare for in-person workstation evaluation rounds.
+              Lock in your problem statement, download official datasets, collaborate with on-floor mentors, and prepare for in-person workstation evaluation rounds.
             </p>
 
             <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>

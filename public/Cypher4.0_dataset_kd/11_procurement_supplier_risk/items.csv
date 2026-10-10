@@ -1,0 +1,303 @@
+item,description,category,criticality,approved_suppliers
+CAS-101,Casting part 1,Castings,A,Sai Bengaluru Foundry;Prime Ludhiana Foundry
+CAS-102,Casting part 2,Castings,A,Mysore Foundry Works;Precision Rajkot Foundry
+CAS-103,Casting part 3,Castings,C,Sri Hubballi Foundry;Mysore Foundry Works
+CAS-104,Casting part 4,Castings,B,Belgaum Alloys
+CAS-105,Casting part 5,Castings,B,Shree Belagavi Foundry;Deccan Chennai Foundry
+CAS-106,Casting part 6,Castings,C,Belgaum Alloys
+CAS-107,Casting part 7,Castings,C,Prime Ludhiana Foundry;Belgaum Alloys
+CAS-108,Casting part 8,Castings,C,Mysore Foundry Works
+CAS-109,Casting part 9,Castings,C,Shree Belagavi Foundry;National Mysuru Foundry
+CAS-110,Casting part 10,Castings,B,Belgaum Alloys
+CAS-111,Casting part 11,Castings,C,Global Pune Foundry;Shakti Castings
+CAS-112,Casting part 12,Castings,B,Royal Hubballi Foundry;Prime Ludhiana Foundry
+CAS-113,Casting part 13,Castings,C,New Ludhiana Foundry
+CAS-114,Casting part 14,Castings,C,New Ludhiana Foundry
+CAS-115,Casting part 15,Castings,B,Prime Coimbatore Foundry
+CAS-116,Casting part 16,Castings,C,Sai Bengaluru Foundry;Shree Belagavi Foundry
+CAS-117,Casting part 17,Castings,C,Prime Ludhiana Foundry;Deccan Chennai Foundry
+CAS-118,Casting part 18,Castings,B,Sri Hubballi Foundry
+CAS-119,Casting part 19,Castings,C,Sai Bengaluru Foundry
+CAS-120,Casting part 20,Castings,B,Sri Hubballi Foundry;Royal Rajkot Foundry
+CAS-121,Casting part 21,Castings,A,Precision Rajkot Foundry
+CAS-122,Casting part 22,Castings,C,Prime Ludhiana Foundry
+CAS-123,Casting part 23,Castings,C,Shree Belagavi Foundry;National Mysuru Foundry
+CAS-124,Casting part 24,Castings,B,Shree Belagavi Foundry;Royal Rajkot Foundry
+CAS-125,Casting part 25,Castings,B,Sri Hubballi Foundry;Prime Coimbatore Foundry
+CAS-126,Casting part 26,Castings,A,Royal Hubballi Foundry;New Ludhiana Foundry
+CAS-127,Casting part 27,Castings,A,National Mysuru Foundry;Deccan Chennai Foundry
+CAS-128,Casting part 28,Castings,C,Star Coimbatore Foundry
+CAS-129,Casting part 29,Castings,B,Prime Ludhiana Foundry;Royal Hubballi Foundry
+CAS-130,Casting part 30,Castings,C,National Mysuru Foundry;Precision Rajkot Foundry
+FAS-131,Fastener part 31,Fasteners,C,Sundaram Fasteners Supply;Deccan Hubballi Fasteners
+FAS-132,Fastener part 32,Fasteners,C,Sundaram Fasteners Supply;Deccan Mysuru Fasteners
+FAS-133,Fastener part 33,Fasteners,B,Sundaram Fasteners Supply;Deccan Mysuru Fasteners
+FAS-134,Fastener part 34,Fasteners,B,Sundaram Fasteners Supply;United Mysuru Fasteners
+FAS-135,Fastener part 35,Fasteners,C,Sundaram Fasteners Supply;New Chennai Fasteners
+FAS-136,Fastener part 36,Fasteners,C,Sundaram Fasteners Supply;Deccan Hubballi Fasteners
+FAS-137,Fastener part 37,Fasteners,C,Sundaram Fasteners Supply;Deccan Chennai Fasteners
+FAS-138,Fastener part 38,Fasteners,A,Sundaram Fasteners Supply;Classic Bengaluru Fasteners
+FAS-139,Fastener part 39,Fasteners,A,Sundaram Fasteners Supply;Royal Mysuru Fasteners
+FAS-140,Fastener part 40,Fasteners,C,Sundaram Fasteners Supply;Classic Bengaluru Fasteners
+FAS-141,Fastener part 41,Fasteners,B,New Hubballi Fasteners;Classic Bengaluru Fasteners
+FAS-142,Fastener part 42,Fasteners,C,New Chennai Fasteners;New Bengaluru Fasteners
+FAS-143,Fastener part 43,Fasteners,C,New Bengaluru Fasteners;Prime Hubballi Fasteners
+FAS-144,Fastener part 44,Fasteners,C,Royal Coimbatore Fasteners
+FAS-145,Fastener part 45,Fasteners,A,Prime Hubballi Fasteners
+FAS-146,Fastener part 46,Fasteners,B,Deccan Mysuru Fasteners;Royal Chennai Fasteners
+FAS-147,Fastener part 47,Fasteners,C,Royal Coimbatore Fasteners
+FAS-148,Fastener part 48,Fasteners,B,Sundaram Fasteners Supply
+FAS-149,Fastener part 49,Fasteners,B,Prime Hubballi Fasteners;Royal Coimbatore Fasteners
+FAS-150,Fastener part 50,Fasteners,B,Sri Hubballi Fasteners
+FAS-151,Fastener part 51,Fasteners,C,United Mysuru Fasteners;New Chennai Fasteners
+FAS-152,Fastener part 52,Fasteners,C,Prime Hubballi Fasteners;Classic Bengaluru Fasteners
+FAS-153,Fastener part 53,Fasteners,B,New Chennai Fasteners
+FAS-154,Fastener part 54,Fasteners,B,Royal Coimbatore Fasteners;Royal Mysuru Fasteners
+FAS-155,Fastener part 55,Fasteners,C,Sundaram Fasteners Supply;Royal Coimbatore Fasteners
+FAS-156,Fastener part 56,Fasteners,B,New Hubballi Fasteners
+FAS-157,Fastener part 57,Fasteners,C,Prime Hubballi Fasteners;Sundaram Fasteners Supply
+FAS-158,Fastener part 58,Fasteners,B,Royal Coimbatore Fasteners;Deccan Chennai Fasteners
+FAS-159,Fastener part 59,Fasteners,A,Royal Mysuru Fasteners;Royal Coimbatore Fasteners
+FAS-160,Fastener part 60,Fasteners,B,Sri Hubballi Fasteners
+BEA-161,Bearing part 61,Bearings,B,New Mysuru Bearings
+BEA-162,Bearing part 62,Bearings,C,Precision Belagavi Bearings;New Mysuru Bearings
+BEA-163,Bearing part 63,Bearings,C,Royal Pune Bearings;National Pune Bearings
+BEA-164,Bearing part 64,Bearings,B,Supreme Rajkot Bearings;Vijaya Mysuru Bearings
+BEA-165,Bearing part 65,Bearings,B,Sai Coimbatore Bearings;Royal Pune Bearings
+BEA-166,Bearing part 66,Bearings,C,New Mysuru Bearings;Star Hosur Bearings
+BEA-167,Bearing part 67,Bearings,C,National Chennai Bearings;Star Hosur Bearings
+BEA-168,Bearing part 68,Bearings,B,Royal Pune Bearings;New Mysuru Bearings
+BEA-169,Bearing part 69,Bearings,B,Supreme Rajkot Bearings;Precision Belagavi Bearings
+BEA-170,Bearing part 70,Bearings,C,National Chennai Bearings;National Pune Bearings
+BEA-171,Bearing part 71,Bearings,C,Global Belagavi Bearings;Vijaya Belagavi Bearings
+BEA-172,Bearing part 72,Bearings,B,Precision Ludhiana Bearings;Global Belagavi Bearings
+BEA-173,Bearing part 73,Bearings,C,Royal Coimbatore Bearings;Royal Pune Bearings
+BEA-174,Bearing part 74,Bearings,B,Royal Coimbatore Bearings
+BEA-175,Bearing part 75,Bearings,B,Sai Coimbatore Bearings;National Chennai Bearings
+BEA-176,Bearing part 76,Bearings,C,Vijaya Belagavi Bearings
+BEA-177,Bearing part 77,Bearings,A,Royal Coimbatore Bearings;Precision Belagavi Bearings
+BEA-178,Bearing part 78,Bearings,C,Deccan Rajkot Bearings
+BEA-179,Bearing part 79,Bearings,C,Royal Coimbatore Bearings
+BEA-180,Bearing part 80,Bearings,C,Star Hosur Bearings
+BEA-181,Bearing part 81,Bearings,C,Star Hosur Bearings;Global Belagavi Bearings
+BEA-182,Bearing part 82,Bearings,B,Global Belagavi Bearings
+BEA-183,Bearing part 83,Bearings,B,Supreme Rajkot Bearings;Star Hosur Bearings
+BEA-184,Bearing part 84,Bearings,B,Sai Coimbatore Bearings
+BEA-185,Bearing part 85,Bearings,A,Vijaya Mysuru Bearings
+BEA-186,Bearing part 86,Bearings,B,National Pune Bearings;National Chennai Bearings
+BEA-187,Bearing part 87,Bearings,C,Vijaya Belagavi Bearings
+BEA-188,Bearing part 88,Bearings,C,Star Hosur Bearings;Deccan Rajkot Bearings
+BEA-189,Bearing part 89,Bearings,C,National Chennai Bearings
+BEA-190,Bearing part 90,Bearings,C,Supreme Rajkot Bearings;Precision Ludhiana Bearings
+SEA-191,Seal part 91,Seals,C,Classic Belagavi Seals
+SEA-192,Seal part 92,Seals,A,Royal Pune Seals;Sai Rajkot Seals
+SEA-193,Seal part 93,Seals,C,Prime Coimbatore Seals;Deccan Pune Seals
+SEA-194,Seal part 94,Seals,B,Deccan Chennai Seals
+SEA-195,Seal part 95,Seals,B,Prime Hosur Seals;Classic Coimbatore Seals
+SEA-196,Seal part 96,Seals,B,Prime Coimbatore Seals;Supreme Chennai Seals
+SEA-197,Seal part 97,Seals,C,Royal Pune Seals
+SEA-198,Seal part 98,Seals,C,Deccan Pune Seals
+SEA-199,Seal part 99,Seals,B,Shree Pune Seals;Sai Rajkot Seals
+SEA-200,Seal part 100,Seals,B,Sai Rajkot Seals;New Ludhiana Seals
+SEA-201,Seal part 101,Seals,C,Supreme Chennai Seals;National Hubballi Seals
+SEA-202,Seal part 102,Seals,A,Deccan Hosur Seals;Sri Bengaluru Seals
+SEA-203,Seal part 103,Seals,C,Royal Bengaluru Seals
+SEA-204,Seal part 104,Seals,C,Deccan Chennai Seals;Sai Rajkot Seals
+SEA-205,Seal part 105,Seals,B,Deccan Hosur Seals;Prime Hosur Seals
+SEA-206,Seal part 106,Seals,B,National Hubballi Seals;Deccan Hosur Seals
+SEA-207,Seal part 107,Seals,B,Royal Mysuru Seals
+SEA-208,Seal part 108,Seals,C,Royal Pune Seals;Deccan Chennai Seals
+SEA-209,Seal part 109,Seals,B,Supreme Chennai Seals;New Ludhiana Seals
+SEA-210,Seal part 110,Seals,A,Royal Mysuru Seals
+SEA-211,Seal part 111,Seals,B,Classic Coimbatore Seals;Classic Belagavi Seals
+SEA-212,Seal part 112,Seals,A,Deccan Hosur Seals
+SEA-213,Seal part 113,Seals,A,Prime Hosur Seals;Royal Bengaluru Seals
+SEA-214,Seal part 114,Seals,C,Deccan Chennai Seals
+SEA-215,Seal part 115,Seals,C,Prime Coimbatore Seals;Classic Belagavi Seals
+SEA-216,Seal part 116,Seals,B,Shree Pune Seals
+SEA-217,Seal part 117,Seals,C,Royal Bengaluru Seals;Classic Belagavi Seals
+SEA-218,Seal part 118,Seals,C,Classic Belagavi Seals
+SEA-219,Seal part 119,Seals,C,National Hubballi Seals
+SEA-220,Seal part 120,Seals,C,Royal Bengaluru Seals;Royal Pune Seals
+MOT-221,Motor part 121,Motors,C,Coimbatore Pumps & Motors
+MOT-222,Motor part 122,Motors,B,Coimbatore Pumps & Motors
+MOT-223,Motor part 123,Motors,C,Coimbatore Pumps & Motors
+MOT-224,Motor part 124,Motors,C,Coimbatore Pumps & Motors
+MOT-225,Motor part 125,Motors,C,Coimbatore Pumps & Motors
+MOT-226,Motor part 126,Motors,A,Coimbatore Pumps & Motors
+MOT-227,Motor part 127,Motors,B,Royal Mysuru Motors;New Mysuru Motors
+MOT-228,Motor part 128,Motors,B,Sri Rajkot Motors;Coimbatore Pumps & Motors
+MOT-229,Motor part 129,Motors,C,Coimbatore Pumps & Motors
+MOT-230,Motor part 130,Motors,B,Global Chennai Motors;Supreme Coimbatore Motors
+MOT-231,Motor part 131,Motors,C,Shree Rajkot Motors
+MOT-232,Motor part 132,Motors,B,Shree Rajkot Motors
+MOT-233,Motor part 133,Motors,C,Star Chennai Motors
+MOT-234,Motor part 134,Motors,B,Deccan Rajkot Motors;Deccan Hubballi Motors
+MOT-235,Motor part 135,Motors,A,Precision Mysuru Motors;Star Chennai Motors
+MOT-236,Motor part 136,Motors,B,Precision Pune Motors;Shree Rajkot Motors
+MOT-237,Motor part 137,Motors,C,Star Hubballi Motors
+MOT-238,Motor part 138,Motors,B,Shree Rajkot Motors;Precision Pune Motors
+MOT-239,Motor part 139,Motors,C,United Mysuru Motors
+MOT-240,Motor part 140,Motors,B,Star Chennai Motors;Vijaya Ludhiana Motors
+MOT-241,Motor part 141,Motors,C,Deccan Belagavi Motors;Precision Mysuru Motors
+MOT-242,Motor part 142,Motors,B,New Mysuru Motors
+MOT-243,Motor part 143,Motors,C,Deccan Hubballi Motors;Deccan Rajkot Motors
+MOT-244,Motor part 144,Motors,B,Deccan Belagavi Motors;Supreme Coimbatore Motors
+MOT-245,Motor part 145,Motors,C,Vijaya Ludhiana Motors
+MOT-246,Motor part 146,Motors,A,Vijaya Ludhiana Motors;Sri Rajkot Motors
+MOT-247,Motor part 147,Motors,A,Star Hubballi Motors;Global Chennai Motors
+MOT-248,Motor part 148,Motors,B,Star Hubballi Motors
+MOT-249,Motor part 149,Motors,C,Royal Mysuru Motors;Star Hubballi Motors
+MOT-250,Motor part 150,Motors,B,New Mysuru Motors;Deccan Belagavi Motors
+ELE-251,Electronic part 151,Electronics,C,Sai Rajkot Electronics;National Chennai Electronics
+ELE-252,Electronic part 152,Electronics,C,Vijaya Hosur Electronics;Vijaya Hubballi Electronics
+ELE-253,Electronic part 153,Electronics,C,National Bengaluru Electronics;Vijaya Hubballi Electronics
+ELE-254,Electronic part 154,Electronics,C,Sai Rajkot Electronics;Royal Bengaluru Electronics
+ELE-255,Electronic part 155,Electronics,B,National Chennai Electronics
+ELE-256,Electronic part 156,Electronics,C,National Chennai Electronics
+ELE-257,Electronic part 157,Electronics,C,Sai Hosur Electronics
+ELE-258,Electronic part 158,Electronics,B,National Mysuru Electronics;Royal Bengaluru Electronics
+ELE-259,Electronic part 159,Electronics,C,National Bengaluru Electronics;Sai Hosur Electronics
+ELE-260,Electronic part 160,Electronics,B,Vijaya Hosur Electronics;Shree Coimbatore Electronics
+ELE-261,Electronic part 161,Electronics,C,Shree Coimbatore Electronics;Hosur Electronics
+ELE-262,Electronic part 162,Electronics,B,National Mysuru Electronics
+ELE-263,Electronic part 163,Electronics,C,Star Chennai Electronics;Royal Bengaluru Electronics
+ELE-264,Electronic part 164,Electronics,C,Star Chennai Electronics;National Mysuru Electronics
+ELE-265,Electronic part 165,Electronics,B,National Chennai Electronics
+ELE-266,Electronic part 166,Electronics,C,Deccan Mysuru Electronics
+ELE-267,Electronic part 167,Electronics,C,National Bengaluru Electronics;Sai Rajkot Electronics
+ELE-268,Electronic part 168,Electronics,B,Royal Bengaluru Electronics
+ELE-269,Electronic part 169,Electronics,B,Star Chennai Electronics;Sai Hosur Electronics
+ELE-270,Electronic part 170,Electronics,B,Hosur Electronics;National Bengaluru Electronics
+ELE-271,Electronic part 171,Electronics,B,Star Chennai Electronics;Hosur Electronics
+ELE-272,Electronic part 172,Electronics,B,Vijaya Hosur Electronics
+ELE-273,Electronic part 173,Electronics,C,National Bengaluru Electronics;Vijaya Hosur Electronics
+ELE-274,Electronic part 174,Electronics,A,National Mysuru Electronics;Sai Rajkot Electronics
+ELE-275,Electronic part 175,Electronics,B,Shree Coimbatore Electronics
+ELE-276,Electronic part 176,Electronics,C,Sai Hosur Electronics;Star Chennai Electronics
+ELE-277,Electronic part 177,Electronics,A,National Mysuru Electronics;Sai Hosur Electronics
+ELE-278,Electronic part 178,Electronics,B,Vijaya Hosur Electronics;Star Chennai Electronics
+ELE-279,Electronic part 179,Electronics,C,National Chennai Electronics;Deccan Mysuru Electronics
+ELE-280,Electronic part 180,Electronics,C,Star Chennai Electronics
+PAC-281,Packaging part 181,Packaging,B,Vijaya Packaging;Deccan Chennai Packaging
+PAC-282,Packaging part 182,Packaging,C,Vijaya Packaging;Sri Mysuru Packaging
+PAC-283,Packaging part 183,Packaging,C,Vijaya Packaging;Deccan Chennai Packaging
+PAC-284,Packaging part 184,Packaging,C,Vijaya Packaging;Deccan Chennai Packaging
+PAC-285,Packaging part 185,Packaging,A,Sri Mysuru Packaging;Sri Rajkot Packaging
+PAC-286,Packaging part 186,Packaging,C,Prime Hubballi Packaging;Classic Pune Packaging
+PAC-287,Packaging part 187,Packaging,A,Star Bengaluru Packaging
+PAC-288,Packaging part 188,Packaging,C,Sri Rajkot Packaging;Star Bengaluru Packaging
+PAC-289,Packaging part 189,Packaging,B,Classic Belagavi Packaging
+PAC-290,Packaging part 190,Packaging,B,Shree Chennai Packaging;Prime Hubballi Packaging
+PAC-291,Packaging part 191,Packaging,C,Supreme Rajkot Packaging
+PAC-292,Packaging part 192,Packaging,C,Sri Rajkot Packaging
+PAC-293,Packaging part 193,Packaging,B,United Rajkot Packaging;Star Belagavi Packaging
+PAC-294,Packaging part 194,Packaging,C,Sri Rajkot Packaging;Star Belagavi Packaging
+PAC-295,Packaging part 195,Packaging,A,Supreme Coimbatore Packaging;Sri Rajkot Packaging
+PAC-296,Packaging part 196,Packaging,C,Prime Hubballi Packaging;Star Hosur Packaging
+PAC-297,Packaging part 197,Packaging,C,Star Bengaluru Packaging;Prime Hubballi Packaging
+PAC-298,Packaging part 198,Packaging,C,Classic Belagavi Packaging;Prime Hubballi Packaging
+PAC-299,Packaging part 199,Packaging,C,Supreme Rajkot Packaging;Supreme Coimbatore Packaging
+PAC-300,Packaging part 200,Packaging,B,Classic Pune Packaging
+PAC-301,Packaging part 201,Packaging,B,United Hosur Packaging;United Rajkot Packaging
+PAC-302,Packaging part 202,Packaging,C,Shree Chennai Packaging;Sri Rajkot Packaging
+PAC-303,Packaging part 203,Packaging,C,Classic Pune Packaging
+PAC-304,Packaging part 204,Packaging,C,Classic Belagavi Packaging;Sri Rajkot Packaging
+PAC-305,Packaging part 205,Packaging,C,Star Bengaluru Packaging;Prime Hubballi Packaging
+PAC-306,Packaging part 206,Packaging,B,Star Hosur Packaging;Star Bengaluru Packaging
+PAC-307,Packaging part 207,Packaging,C,Star Belagavi Packaging
+PAC-308,Packaging part 208,Packaging,B,Classic Pune Packaging;Shree Chennai Packaging
+PAC-309,Packaging part 209,Packaging,A,Deccan Chennai Packaging
+PAC-310,Packaging part 210,Packaging,C,Classic Pune Packaging
+RUB-311,Rubber Part part 211,Rubber Parts,B,Krishna Rubber Products;Royal Rajkot Rubber Works
+RUB-312,Rubber Part part 212,Rubber Parts,C,Krishna Rubber Products;Sai Mysuru Rubber Works
+RUB-313,Rubber Part part 213,Rubber Parts,C,Krishna Rubber Products;Sai Pune Rubber Works
+RUB-314,Rubber Part part 214,Rubber Parts,C,Krishna Rubber Products;Sai Pune Rubber Works
+RUB-315,Rubber Part part 215,Rubber Parts,C,Krishna Rubber Products;Royal Mysuru Rubber Works
+RUB-316,Rubber Part part 216,Rubber Parts,B,New Mysuru Rubber Works;United Chennai Rubber Works
+RUB-317,Rubber Part part 217,Rubber Parts,A,Royal Rajkot Rubber Works;Star Coimbatore Rubber Works
+RUB-318,Rubber Part part 218,Rubber Parts,C,Krishna Rubber Products;Deccan Pune Rubber Works
+RUB-319,Rubber Part part 219,Rubber Parts,A,Royal Rajkot Rubber Works
+RUB-320,Rubber Part part 220,Rubber Parts,C,Royal Mysuru Rubber Works;Krishna Rubber Products
+RUB-321,Rubber Part part 221,Rubber Parts,C,Sai Pune Rubber Works;Deccan Pune Rubber Works
+RUB-322,Rubber Part part 222,Rubber Parts,C,Vijaya Hubballi Rubber Works
+RUB-323,Rubber Part part 223,Rubber Parts,C,Vijaya Hubballi Rubber Works
+RUB-324,Rubber Part part 224,Rubber Parts,B,New Mysuru Rubber Works
+RUB-325,Rubber Part part 225,Rubber Parts,C,Krishna Rubber Products;Sai Mysuru Rubber Works
+RUB-326,Rubber Part part 226,Rubber Parts,C,Deccan Pune Rubber Works
+RUB-327,Rubber Part part 227,Rubber Parts,B,Global Hosur Rubber Works;Sai Pune Rubber Works
+RUB-328,Rubber Part part 228,Rubber Parts,B,New Mysuru Rubber Works
+RUB-329,Rubber Part part 229,Rubber Parts,B,Global Hosur Rubber Works
+RUB-330,Rubber Part part 230,Rubber Parts,C,Star Coimbatore Rubber Works
+RUB-331,Rubber Part part 231,Rubber Parts,B,Sai Mysuru Rubber Works;Royal Rajkot Rubber Works
+RUB-332,Rubber Part part 232,Rubber Parts,B,Sai Mysuru Rubber Works
+RUB-333,Rubber Part part 233,Rubber Parts,B,Vijaya Bengaluru Rubber Works;Vijaya Coimbatore Rubber Works
+RUB-334,Rubber Part part 234,Rubber Parts,A,New Mysuru Rubber Works
+RUB-335,Rubber Part part 235,Rubber Parts,C,New Mysuru Rubber Works;Deccan Pune Rubber Works
+RUB-336,Rubber Part part 236,Rubber Parts,B,Royal Rajkot Rubber Works
+RUB-337,Rubber Part part 237,Rubber Parts,B,Royal Mysuru Rubber Works;Global Hosur Rubber Works
+RUB-338,Rubber Part part 238,Rubber Parts,B,Sai Mysuru Rubber Works;Global Hosur Rubber Works
+RUB-339,Rubber Part part 239,Rubber Parts,C,Global Hosur Rubber Works;Vijaya Coimbatore Rubber Works
+RUB-340,Rubber Part part 240,Rubber Parts,B,Vijaya Hubballi Rubber Works;Royal Mysuru Rubber Works
+SHE-341,Sheet Metal part 241,Sheet Metal,B,National Hosur Press Works;National Pune Press Works
+SHE-342,Sheet Metal part 242,Sheet Metal,C,Supreme Hubballi Press Works;National Hosur Press Works
+SHE-343,Sheet Metal part 243,Sheet Metal,B,Shree Bengaluru Press Works;Star Ludhiana Press Works
+SHE-344,Sheet Metal part 244,Sheet Metal,C,Royal Bengaluru Press Works;Deccan Bengaluru Press Works
+SHE-345,Sheet Metal part 245,Sheet Metal,C,Sai Ludhiana Press Works;Star Rajkot Press Works
+SHE-346,Sheet Metal part 246,Sheet Metal,B,Sai Mysuru Press Works
+SHE-347,Sheet Metal part 247,Sheet Metal,B,Sai Ludhiana Press Works
+SHE-348,Sheet Metal part 248,Sheet Metal,B,Prime Pune Press Works;Supreme Hubballi Press Works
+SHE-349,Sheet Metal part 249,Sheet Metal,B,Star Ludhiana Press Works;Sai Ludhiana Press Works
+SHE-350,Sheet Metal part 250,Sheet Metal,C,National Hosur Press Works;Sai Ludhiana Press Works
+SHE-351,Sheet Metal part 251,Sheet Metal,A,Sai Mysuru Press Works;United Pune Press Works
+SHE-352,Sheet Metal part 252,Sheet Metal,A,Sai Ludhiana Press Works
+SHE-353,Sheet Metal part 253,Sheet Metal,C,Supreme Hubballi Press Works;Deccan Mysuru Press Works
+SHE-354,Sheet Metal part 254,Sheet Metal,C,Prime Belagavi Press Works
+SHE-355,Sheet Metal part 255,Sheet Metal,C,Deccan Mysuru Press Works
+SHE-356,Sheet Metal part 256,Sheet Metal,C,Shree Bengaluru Press Works
+SHE-357,Sheet Metal part 257,Sheet Metal,C,United Pune Press Works;Sai Ludhiana Press Works
+SHE-358,Sheet Metal part 258,Sheet Metal,B,Royal Bengaluru Press Works
+SHE-359,Sheet Metal part 259,Sheet Metal,A,Star Ludhiana Press Works;Deccan Bengaluru Press Works
+SHE-360,Sheet Metal part 260,Sheet Metal,C,National Pune Press Works
+SHE-361,Sheet Metal part 261,Sheet Metal,B,Sai Ludhiana Press Works;Deccan Mysuru Press Works
+SHE-362,Sheet Metal part 262,Sheet Metal,B,Sai Mysuru Press Works;National Pune Press Works
+SHE-363,Sheet Metal part 263,Sheet Metal,C,Prime Belagavi Press Works;Deccan Mysuru Press Works
+SHE-364,Sheet Metal part 264,Sheet Metal,C,Star Ludhiana Press Works;United Pune Press Works
+SHE-365,Sheet Metal part 265,Sheet Metal,C,Deccan Bengaluru Press Works;Prime Belagavi Press Works
+SHE-366,Sheet Metal part 266,Sheet Metal,C,Supreme Hubballi Press Works;Star Rajkot Press Works
+SHE-367,Sheet Metal part 267,Sheet Metal,C,Sai Ludhiana Press Works;United Pune Press Works
+SHE-368,Sheet Metal part 268,Sheet Metal,C,Sai Mysuru Press Works;Deccan Bengaluru Press Works
+SHE-369,Sheet Metal part 269,Sheet Metal,B,Prime Belagavi Press Works;Prime Pune Press Works
+SHE-370,Sheet Metal part 270,Sheet Metal,B,United Pune Press Works;Deccan Bengaluru Press Works
+PAI-371,Paints & Coating part 271,Paints & Coatings,C,New Hosur Coatings;United Belagavi Coatings
+PAI-372,Paints & Coating part 272,Paints & Coatings,C,Sri Mysuru Coatings
+PAI-373,Paints & Coating part 273,Paints & Coatings,A,Prime Hosur Coatings;Sai Belagavi Coatings
+PAI-374,Paints & Coating part 274,Paints & Coatings,C,United Ludhiana Coatings;Classic Ludhiana Coatings
+PAI-375,Paints & Coating part 275,Paints & Coatings,C,Global Rajkot Coatings;Sai Belagavi Coatings
+PAI-376,Paints & Coating part 276,Paints & Coatings,B,United Belagavi Coatings
+PAI-377,Paints & Coating part 277,Paints & Coatings,C,National Hosur Coatings
+PAI-378,Paints & Coating part 278,Paints & Coatings,C,New Hosur Coatings;United Belagavi Coatings
+PAI-379,Paints & Coating part 279,Paints & Coatings,B,Prime Coimbatore Coatings;United Ludhiana Coatings
+PAI-380,Paints & Coating part 280,Paints & Coatings,B,United Belagavi Coatings;Deccan Chennai Coatings
+PAI-381,Paints & Coating part 281,Paints & Coatings,A,Sai Ludhiana Coatings
+PAI-382,Paints & Coating part 282,Paints & Coatings,B,Deccan Chennai Coatings
+PAI-383,Paints & Coating part 283,Paints & Coatings,A,United Belagavi Coatings
+PAI-384,Paints & Coating part 284,Paints & Coatings,C,United Belagavi Coatings
+PAI-385,Paints & Coating part 285,Paints & Coatings,C,Global Rajkot Coatings
+PAI-386,Paints & Coating part 286,Paints & Coatings,B,United Belagavi Coatings;Global Rajkot Coatings
+PAI-387,Paints & Coating part 287,Paints & Coatings,B,United Ludhiana Coatings;Prime Coimbatore Coatings
+PAI-388,Paints & Coating part 288,Paints & Coatings,A,Global Rajkot Coatings
+PAI-389,Paints & Coating part 289,Paints & Coatings,C,Prime Coimbatore Coatings;Sri Mysuru Coatings
+PAI-390,Paints & Coating part 290,Paints & Coatings,B,Classic Belagavi Coatings;Prime Hosur Coatings
+PAI-391,Paints & Coating part 291,Paints & Coatings,C,National Hosur Coatings;Sri Mysuru Coatings
+PAI-392,Paints & Coating part 292,Paints & Coatings,A,Sai Belagavi Coatings;Sai Ludhiana Coatings
+PAI-393,Paints & Coating part 293,Paints & Coatings,B,Prime Hosur Coatings;Deccan Chennai Coatings
+PAI-394,Paints & Coating part 294,Paints & Coatings,B,United Ludhiana Coatings
+PAI-395,Paints & Coating part 295,Paints & Coatings,C,Classic Ludhiana Coatings
+PAI-396,Paints & Coating part 296,Paints & Coatings,C,Prime Coimbatore Coatings;New Hosur Coatings
+PAI-397,Paints & Coating part 297,Paints & Coatings,C,Prime Hosur Coatings;Classic Ludhiana Coatings
+PAI-398,Paints & Coating part 298,Paints & Coatings,B,Classic Ludhiana Coatings;Global Rajkot Coatings
+PAI-399,Paints & Coating part 299,Paints & Coatings,C,National Hosur Coatings;Sai Belagavi Coatings
+PAI-400,Paints & Coating part 300,Paints & Coatings,C,National Hosur Coatings;Classic Belagavi Coatings
+CST-901,Pump Volute Casting – 4in,Castings,A,Shakti Castings
+ELC-220,Motor Controller PCB,Electronics,A,Hosur Electronics

@@ -1,0 +1,54 @@
+supplier,component,price,lead_time_days,moq,expedite_cost_pct
+Rane Components,C-101,1623,5,100,0.05
+Kirloskar Ferrous,C-105,766,10,200,0.08
+Mahle Castings,C-106,1002,10,100,0.15
+Bharat Forge Supplies,C-110,1477,5,500,0.08
+Rane Components,C-115,516,7,500,0.13
+Mahle Castings,C-116,2166,14,100,0.07
+Hosur Precision Works,C-118,410,21,500,0.1
+SKF Distribution,C-122,889,14,50,0.09
+Hosur Precision Works,C-127,1634,21,200,0.13
+Mahle Castings,C-128,416,7,500,0.08
+SKF Distribution,C-133,2226,5,200,0.11
+SKF Distribution,C-136,2158,5,100,0.13
+Kirloskar Ferrous,C-138,162,14,100,0.09
+Kirloskar Ferrous,C-141,446,5,200,0.14
+Hosur Precision Works,C-145,275,21,500,0.14
+Mahle Castings,C-150,180,14,50,0.06
+Kirloskar Ferrous,C-152,1535,10,50,0.05
+Sundram Fasteners,C-154,2265,21,100,0.1
+Rane Components,C-159,2099,14,500,0.12
+Bharat Forge Supplies,C-162,996,10,200,0.14
+Hosur Precision Works,C-165,1241,10,500,0.13
+Kirloskar Ferrous,C-167,697,14,200,0.15
+Mahle Castings,C-168,1368,7,100,0.08
+Hosur Precision Works,C-169,775,5,100,0.14
+Hosur Precision Works,C-173,2029,5,100,0.05
+Mahle Castings,C-178,1993,10,200,0.12
+Mahle Castings,C-179,1845,10,100,0.06
+Rane Components,C-182,311,7,200,0.13
+Hosur Precision Works,C-184,810,10,200,0.07
+Bharat Forge Supplies,C-185,2006,14,100,0.15
+Hosur Precision Works,C-190,1293,21,100,0.07
+Kirloskar Ferrous,C-195,2091,21,500,0.14
+Hosur Precision Works,C-199,116,14,200,0.1
+Bharat Forge Supplies,C-201,795,5,500,0.08
+Hosur Precision Works,C-204,1465,14,500,0.1
+Rane Components,C-207,620,10,200,0.05
+Sundram Fasteners,C-211,86,21,50,0.07
+Rane Components,C-213,838,14,200,0.06
+Mahle Castings,C-215,283,21,500,0.06
+SKF Distribution,C-218,2128,21,200,0.12
+Hosur Precision Works,C-223,175,14,100,0.09
+Kirloskar Ferrous,C-228,1438,7,50,0.11
+Rane Components,C-229,614,21,100,0.07
+SKF Distribution,C-231,994,5,200,0.09
+Mahle Castings,C-234,97,14,500,0.1
+SKF Distribution,C-238,352,14,100,0.14
+Sundram Fasteners,C-243,1325,14,500,0.13
+SKF Distribution,C-244,1359,10,100,0.14
+SKF Distribution,C-114,1450,14,50,0.12
+Hosur Precision Works,C-114A,1566,14,100,0.11
+Kirloskar Ferrous,C-330,3100,10,500,0.12
+Sundram Fasteners,C-150B,192,10,200,0.07
+Bharat Forge Supplies,C-412,7800,14,100,0.11

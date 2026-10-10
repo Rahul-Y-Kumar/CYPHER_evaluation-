@@ -1,0 +1,7 @@
+carrier,lanes_served,rate,truck_types,on_time_rate_90d
+Vega Logistics,All,₹48/km,"32ft MXL (1,400 cases); 22ft (800 cases)",0.91
+Shree Ganesh Transport,North Karnataka,₹44/km,"32ft MXL (1,400 cases)",0.88
+Coastal Carriers,Coastal,₹52/km,22ft (800 cases),0.9
+Deccan Roadlines,All,₹46/km,"32ft MXL (1,400 cases)",0.87
+Swift Freight,South Karnataka,₹42/km,"22ft (800 cases); 32ft MXL (1,400 cases)",0.85
+Kaveri Movers,South Karnataka,₹47/km,22ft (800 cases),0.9

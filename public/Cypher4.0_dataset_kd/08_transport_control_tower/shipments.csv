@@ -1,0 +1,220 @@
+shipment_id,origin,destination,carrier,sku,qty_cases,truck_capacity_cases,dispatch_time,planned_arrival
+S8001,Hosur Plant,Davangere Depot,Swift Freight,SH-SKU-09,1263,1400,2026-10-17 10:00,2026-10-17 17:06
+S8002,Hosur Plant,Chitradurga Depot,Shree Ganesh Transport,SH-SKU-10,970,1400,2026-10-17 17:00,2026-10-17 22:24
+S8003,Hosur Plant,Hubli Depot,Shree Ganesh Transport,SH-SKU-08,1345,1400,2026-10-17 10:00,2026-10-17 19:24
+S8004,Tumakuru Plant,Kolar Depot,Vega Logistics,SH-SKU-02,859,1400,2026-10-17 18:00,2026-10-17 21:30
+S8005,Hosur Plant,Shivamogga Depot,Shree Ganesh Transport,SH-SKU-12,848,1400,2026-10-17 19:00,2026-10-18 02:42
+S8006,Hosur Plant,Mangaluru Depot,Swift Freight,SH-SKU-09,953,1400,2026-10-17 12:00,2026-10-17 22:00
+S8007,Hosur Plant,Chikkamagaluru Depot,Vega Logistics,SH-SKU-07,672,800,2026-10-17 06:00,2026-10-17 13:06
+S8008,Tumakuru Plant,Belagavi Depot,Kaveri Movers,SH-SKU-07,515,800,2026-10-18 14:00,2026-10-18 23:30
+S8009,Tumakuru Plant,Udupi Depot,Swift Freight,SH-SKU-05,712,800,2026-10-18 10:00,2026-10-18 19:00
+S8010,Tumakuru Plant,Davangere Depot,Kaveri Movers,SH-SKU-02,1087,1400,2026-10-18 19:00,2026-10-19 00:30
+S8011,Hosur Plant,Davangere Depot,Vega Logistics,SH-SKU-09,657,800,2026-10-18 10:00,2026-10-18 17:06
+S8012,Tumakuru Plant,Hubli Depot,Vega Logistics,SH-SKU-12,938,1400,2026-10-18 18:00,2026-10-19 01:30
+S8013,Hosur Plant,Shivamogga Depot,Vega Logistics,SH-SKU-10,839,1400,2026-10-18 17:00,2026-10-19 00:42
+S8014,Tumakuru Plant,Kalaburagi Depot,Kaveri Movers,SH-SKU-05,1171,1400,2026-10-18 13:00,2026-10-19 00:00
+S8015,Hosur Plant,Chitradurga Depot,Vega Logistics,SH-SKU-09,866,1400,2026-10-18 14:00,2026-10-18 19:24
+S8016,Tumakuru Plant,Chitradurga Depot,Kaveri Movers,SH-SKU-01,805,1400,2026-10-19 15:00,2026-10-19 19:00
+S8017,Hosur Plant,Chitradurga Depot,Deccan Roadlines,SH-SKU-04,893,1400,2026-10-19 10:00,2026-10-19 15:24
+S8018,Tumakuru Plant,Chikkamagaluru Depot,Kaveri Movers,SH-SKU-12,805,1400,2026-10-19 13:00,2026-10-19 18:30
+S8019,Hosur Plant,Chikkamagaluru Depot,Vega Logistics,SH-SKU-02,1281,1400,2026-10-19 06:00,2026-10-19 13:06
+S8020,Tumakuru Plant,Ballari Depot,Coastal Carriers,SH-SKU-02,905,1400,2026-10-19 15:00,2026-10-19 21:30
+S8021,Hosur Plant,Shivamogga Depot,Deccan Roadlines,SH-SKU-09,746,800,2026-10-19 08:00,2026-10-19 15:42
+S8022,Hosur Plant,Hubli Depot,Deccan Roadlines,SH-SKU-02,1111,1400,2026-10-20 17:00,2026-10-21 02:24
+S8023,Hosur Plant,Udupi Depot,Shree Ganesh Transport,SH-SKU-11,716,800,2026-10-20 05:00,2026-10-20 16:12
+S8024,Tumakuru Plant,Mysuru Depot,Coastal Carriers,SH-SKU-03,527,800,2026-10-20 15:00,2026-10-20 18:30
+S8025,Tumakuru Plant,Ballari Depot,Shree Ganesh Transport,SH-SKU-07,764,800,2026-10-20 11:00,2026-10-20 17:30
+S8026,Hosur Plant,Chikkamagaluru Depot,Deccan Roadlines,SH-SKU-02,559,800,2026-10-20 12:00,2026-10-20 19:06
+S8027,Hosur Plant,Dharwad Depot,Kaveri Movers,SH-SKU-02,1336,1400,2026-10-20 07:00,2026-10-20 17:00
+S8028,Hosur Plant,Mysuru Depot,Vega Logistics,SH-SKU-03,1027,1400,2026-10-20 15:00,2026-10-20 19:48
+S8029,Tumakuru Plant,Davangere Depot,Shree Ganesh Transport,SH-SKU-08,531,800,2026-10-21 19:00,2026-10-22 00:30
+S8030,Hosur Plant,Dharwad Depot,Swift Freight,SH-SKU-11,1081,1400,2026-10-21 08:00,2026-10-21 18:00
+S8031,Tumakuru Plant,Ballari Depot,Deccan Roadlines,SH-SKU-01,1328,1400,2026-10-21 10:00,2026-10-21 16:30
+S8032,Tumakuru Plant,Shivamogga Depot,Kaveri Movers,SH-SKU-02,535,800,2026-10-21 12:00,2026-10-21 18:00
+S8033,Hosur Plant,Dharwad Depot,Vega Logistics,SH-SKU-06,572,800,2026-10-21 11:00,2026-10-21 21:00
+S8034,Hosur Plant,Belagavi Depot,Kaveri Movers,SH-SKU-10,1237,1400,2026-10-22 15:00,2026-10-23 02:42
+S8035,Hosur Plant,Mangaluru Depot,Shree Ganesh Transport,SH-SKU-01,1196,1400,2026-10-22 06:00,2026-10-22 16:00
+S8036,Hosur Plant,Shivamogga Depot,Coastal Carriers,SH-SKU-12,1294,1400,2026-10-22 15:00,2026-10-22 22:42
+S8037,Tumakuru Plant,Chikkamagaluru Depot,Shree Ganesh Transport,SH-SKU-02,1248,1400,2026-10-22 19:00,2026-10-23 00:30
+S8038,Hosur Plant,Ballari Depot,Coastal Carriers,SH-SKU-10,745,800,2026-10-22 12:00,2026-10-22 20:18
+S8039,Hosur Plant,Kolar Depot,Swift Freight,SH-SKU-04,1201,1400,2026-10-22 19:00,2026-10-22 23:48
+S8040,Tumakuru Plant,Chikkamagaluru Depot,Deccan Roadlines,SH-SKU-09,1050,1400,2026-10-22 17:00,2026-10-22 22:30
+S8041,Hosur Plant,Kalaburagi Depot,Swift Freight,SH-SKU-12,797,800,2026-10-22 10:00,2026-10-22 23:24
+S8042,Hosur Plant,Kolar Depot,Coastal Carriers,SH-SKU-03,924,1400,2026-10-23 09:00,2026-10-23 13:48
+S8043,Tumakuru Plant,Mysuru Depot,Swift Freight,SH-SKU-08,660,800,2026-10-23 07:00,2026-10-23 10:30
+S8044,Hosur Plant,Kalaburagi Depot,Deccan Roadlines,SH-SKU-10,557,800,2026-10-23 07:00,2026-10-23 20:24
+S8045,Hosur Plant,Davangere Depot,Kaveri Movers,SH-SKU-01,1169,1400,2026-10-23 17:00,2026-10-24 00:06
+S8046,Tumakuru Plant,Kolar Depot,Vega Logistics,SH-SKU-01,1050,1400,2026-10-23 10:00,2026-10-23 13:30
+S8047,Tumakuru Plant,Ballari Depot,Vega Logistics,SH-SKU-05,560,800,2026-10-23 11:00,2026-10-23 17:30
+S8048,Tumakuru Plant,Ballari Depot,Vega Logistics,SH-SKU-05,1133,1400,2026-10-24 09:00,2026-10-24 15:30
+S8049,Hosur Plant,Kalaburagi Depot,Deccan Roadlines,SH-SKU-06,1239,1400,2026-10-24 14:00,2026-10-25 03:24
+S8050,Tumakuru Plant,Ballari Depot,Vega Logistics,SH-SKU-10,856,1400,2026-10-24 12:00,2026-10-24 18:30
+S8051,Tumakuru Plant,Mangaluru Depot,Vega Logistics,SH-SKU-06,1286,1400,2026-10-24 16:00,2026-10-25 00:00
+S8052,Hosur Plant,Chitradurga Depot,Shree Ganesh Transport,SH-SKU-08,1145,1400,2026-10-24 16:00,2026-10-24 21:24
+S8053,Tumakuru Plant,Mangaluru Depot,Coastal Carriers,SH-SKU-07,1129,1400,2026-10-24 18:00,2026-10-25 02:00
+S8054,Hosur Plant,Mandya Depot,Kaveri Movers,SH-SKU-08,659,800,2026-10-25 18:00,2026-10-25 21:42
+S8055,Hosur Plant,Ballari Depot,Coastal Carriers,SH-SKU-04,888,1400,2026-10-25 18:00,2026-10-26 02:18
+S8056,Tumakuru Plant,Udupi Depot,Vega Logistics,SH-SKU-06,807,1400,2026-10-25 13:00,2026-10-25 22:00
+S8057,Hosur Plant,Mandya Depot,Shree Ganesh Transport,SH-SKU-05,682,800,2026-10-25 13:00,2026-10-25 16:42
+S8058,Hosur Plant,Kalaburagi Depot,Kaveri Movers,SH-SKU-01,660,800,2026-10-25 08:00,2026-10-25 21:24
+S8059,Hosur Plant,Shivamogga Depot,Shree Ganesh Transport,SH-SKU-09,793,800,2026-10-26 08:00,2026-10-26 15:42
+S8060,Tumakuru Plant,Davangere Depot,Deccan Roadlines,SH-SKU-09,1227,1400,2026-10-26 10:00,2026-10-26 15:30
+S8061,Tumakuru Plant,Hassan Depot,Kaveri Movers,SH-SKU-05,915,1400,2026-10-26 15:00,2026-10-26 19:00
+S8062,Hosur Plant,Chikkamagaluru Depot,Shree Ganesh Transport,SH-SKU-04,1180,1400,2026-10-26 06:00,2026-10-26 13:06
+S8063,Tumakuru Plant,Udupi Depot,Vega Logistics,SH-SKU-02,1348,1400,2026-10-26 06:00,2026-10-26 15:00
+S8064,Tumakuru Plant,Hubli Depot,Swift Freight,SH-SKU-07,625,800,2026-10-27 17:00,2026-10-28 00:30
+S8065,Tumakuru Plant,Hassan Depot,Deccan Roadlines,SH-SKU-01,1386,1400,2026-10-27 17:00,2026-10-27 21:00
+S8066,Hosur Plant,Davangere Depot,Deccan Roadlines,SH-SKU-06,1192,1400,2026-10-27 14:00,2026-10-27 21:06
+S8067,Tumakuru Plant,Mangaluru Depot,Coastal Carriers,SH-SKU-10,891,1400,2026-10-27 09:00,2026-10-27 17:00
+S8068,Hosur Plant,Belagavi Depot,Deccan Roadlines,SH-SKU-11,1036,1400,2026-10-27 08:00,2026-10-27 19:42
+S8069,Hosur Plant,Kolar Depot,Swift Freight,SH-SKU-08,1142,1400,2026-10-27 14:00,2026-10-27 18:48
+S8070,Tumakuru Plant,Mysuru Depot,Vega Logistics,SH-SKU-02,755,800,2026-10-28 05:00,2026-10-28 08:30
+S8071,Hosur Plant,Belagavi Depot,Deccan Roadlines,SH-SKU-12,1377,1400,2026-10-28 10:00,2026-10-28 21:42
+S8072,Hosur Plant,Dharwad Depot,Kaveri Movers,SH-SKU-12,1048,1400,2026-10-28 10:00,2026-10-28 20:00
+S8073,Tumakuru Plant,Belagavi Depot,Shree Ganesh Transport,SH-SKU-04,1361,1400,2026-10-28 12:00,2026-10-28 21:30
+S8074,Tumakuru Plant,Chikkamagaluru Depot,Shree Ganesh Transport,SH-SKU-08,1149,1400,2026-10-28 11:00,2026-10-28 16:30
+S8075,Tumakuru Plant,Belagavi Depot,Deccan Roadlines,SH-SKU-06,917,1400,2026-10-28 07:00,2026-10-28 16:30
+S8076,Hosur Plant,Udupi Depot,Swift Freight,SH-SKU-01,1280,1400,2026-10-28 08:00,2026-10-28 19:12
+S8077,Tumakuru Plant,Chitradurga Depot,Kaveri Movers,SH-SKU-12,1183,1400,2026-10-29 14:00,2026-10-29 18:00
+S8078,Tumakuru Plant,Mysuru Depot,Vega Logistics,SH-SKU-01,624,800,2026-10-29 15:00,2026-10-29 18:30
+S8079,Tumakuru Plant,Mangaluru Depot,Deccan Roadlines,SH-SKU-06,1001,1400,2026-10-29 13:00,2026-10-29 21:00
+S8080,Tumakuru Plant,Chikkamagaluru Depot,Vega Logistics,SH-SKU-03,893,1400,2026-10-29 09:00,2026-10-29 14:30
+S8081,Hosur Plant,Udupi Depot,Coastal Carriers,SH-SKU-04,913,1400,2026-10-29 08:00,2026-10-29 19:12
+S8082,Tumakuru Plant,Hubli Depot,Coastal Carriers,SH-SKU-10,676,800,2026-10-29 07:00,2026-10-29 14:30
+S8083,Tumakuru Plant,Chikkamagaluru Depot,Coastal Carriers,SH-SKU-04,986,1400,2026-10-29 14:00,2026-10-29 19:30
+S8084,Hosur Plant,Shivamogga Depot,Deccan Roadlines,SH-SKU-07,1247,1400,2026-10-29 16:00,2026-10-29 23:42
+S8085,Hosur Plant,Dharwad Depot,Vega Logistics,SH-SKU-03,808,1400,2026-10-30 18:00,2026-10-31 04:00
+S8086,Tumakuru Plant,Hubli Depot,Deccan Roadlines,SH-SKU-01,1301,1400,2026-10-30 09:00,2026-10-30 16:30
+S8087,Tumakuru Plant,Chikkamagaluru Depot,Kaveri Movers,SH-SKU-09,963,1400,2026-10-30 11:00,2026-10-30 16:30
+S8088,Tumakuru Plant,Ballari Depot,Swift Freight,SH-SKU-01,1360,1400,2026-10-30 15:00,2026-10-30 21:30
+S8089,Tumakuru Plant,Ballari Depot,Deccan Roadlines,SH-SKU-07,1074,1400,2026-10-30 12:00,2026-10-30 18:30
+S8090,Hosur Plant,Kalaburagi Depot,Shree Ganesh Transport,SH-SKU-02,1109,1400,2026-10-31 10:00,2026-10-31 23:24
+S8091,Tumakuru Plant,Mysuru Depot,Vega Logistics,SH-SKU-12,598,800,2026-10-31 15:00,2026-10-31 18:30
+S8092,Tumakuru Plant,Hassan Depot,Coastal Carriers,SH-SKU-08,654,800,2026-10-31 06:00,2026-10-31 10:00
+S8093,Tumakuru Plant,Mysuru Depot,Coastal Carriers,SH-SKU-02,545,800,2026-10-31 09:00,2026-10-31 12:30
+S8094,Tumakuru Plant,Kolar Depot,Swift Freight,SH-SKU-11,876,1400,2026-10-31 14:00,2026-10-31 17:30
+S8095,Tumakuru Plant,Udupi Depot,Shree Ganesh Transport,SH-SKU-09,595,800,2026-11-01 07:00,2026-11-01 16:00
+S8096,Hosur Plant,Kolar Depot,Swift Freight,SH-SKU-03,532,800,2026-11-01 06:00,2026-11-01 10:48
+S8097,Hosur Plant,Ballari Depot,Swift Freight,SH-SKU-12,538,800,2026-11-01 08:00,2026-11-01 16:18
+S8098,Hosur Plant,Mandya Depot,Deccan Roadlines,SH-SKU-12,1349,1400,2026-11-01 13:00,2026-11-01 16:42
+S8099,Hosur Plant,Mysuru Depot,Coastal Carriers,SH-SKU-06,1179,1400,2026-11-01 05:00,2026-11-01 09:48
+S8100,Hosur Plant,Belagavi Depot,Coastal Carriers,SH-SKU-09,663,800,2026-11-01 11:00,2026-11-01 22:42
+S8101,Tumakuru Plant,Mandya Depot,Swift Freight,SH-SKU-04,850,1400,2026-11-02 09:00,2026-11-02 11:30
+S8102,Hosur Plant,Belagavi Depot,Swift Freight,SH-SKU-03,1081,1400,2026-11-02 16:00,2026-11-03 03:42
+S8103,Tumakuru Plant,Davangere Depot,Shree Ganesh Transport,SH-SKU-10,898,1400,2026-11-02 05:00,2026-11-02 10:30
+S8104,Hosur Plant,Udupi Depot,Shree Ganesh Transport,SH-SKU-08,968,1400,2026-11-02 13:00,2026-11-03 00:12
+S8105,Tumakuru Plant,Chikkamagaluru Depot,Shree Ganesh Transport,SH-SKU-10,936,1400,2026-11-02 10:00,2026-11-02 15:30
+S8106,Hosur Plant,Ballari Depot,Coastal Carriers,SH-SKU-06,524,800,2026-11-02 09:00,2026-11-02 17:18
+S8107,Hosur Plant,Chikkamagaluru Depot,Swift Freight,SH-SKU-01,675,800,2026-11-03 19:00,2026-11-04 02:06
+S8108,Tumakuru Plant,Mandya Depot,Kaveri Movers,SH-SKU-02,802,1400,2026-11-03 13:00,2026-11-03 15:30
+S8109,Hosur Plant,Chitradurga Depot,Swift Freight,SH-SKU-04,889,1400,2026-11-03 16:00,2026-11-03 21:24
+S8110,Tumakuru Plant,Hassan Depot,Coastal Carriers,SH-SKU-11,1385,1400,2026-11-03 07:00,2026-11-03 11:00
+S8111,Hosur Plant,Davangere Depot,Kaveri Movers,SH-SKU-11,568,800,2026-11-03 17:00,2026-11-04 00:06
+S8112,Hosur Plant,Ballari Depot,Coastal Carriers,SH-SKU-12,909,1400,2026-11-03 12:00,2026-11-03 20:18
+S8113,Hosur Plant,Mandya Depot,Deccan Roadlines,SH-SKU-12,1000,1400,2026-11-03 19:00,2026-11-03 22:42
+S8114,Hosur Plant,Mandya Depot,Deccan Roadlines,SH-SKU-10,957,1400,2026-11-03 08:00,2026-11-03 11:42
+S8115,Tumakuru Plant,Chitradurga Depot,Coastal Carriers,SH-SKU-10,1088,1400,2026-11-04 12:00,2026-11-04 16:00
+S8116,Hosur Plant,Kolar Depot,Vega Logistics,SH-SKU-10,859,1400,2026-11-04 05:00,2026-11-04 09:48
+S8117,Hosur Plant,Chikkamagaluru Depot,Swift Freight,SH-SKU-06,787,800,2026-11-04 18:00,2026-11-05 01:06
+S8118,Tumakuru Plant,Hassan Depot,Vega Logistics,SH-SKU-06,809,1400,2026-11-04 19:00,2026-11-04 23:00
+S8119,Tumakuru Plant,Mandya Depot,Shree Ganesh Transport,SH-SKU-07,1055,1400,2026-11-04 17:00,2026-11-04 19:30
+S8120,Tumakuru Plant,Hubli Depot,Coastal Carriers,SH-SKU-02,1282,1400,2026-11-04 11:00,2026-11-04 18:30
+S8121,Hosur Plant,Mandya Depot,Kaveri Movers,SH-SKU-04,1167,1400,2026-11-04 08:00,2026-11-04 11:42
+S8122,Tumakuru Plant,Davangere Depot,Swift Freight,SH-SKU-02,1160,1400,2026-11-04 11:00,2026-11-04 16:30
+S8123,Tumakuru Plant,Hubli Depot,Shree Ganesh Transport,SH-SKU-07,889,1400,2026-11-05 18:00,2026-11-06 01:30
+S8124,Tumakuru Plant,Dharwad Depot,Swift Freight,SH-SKU-04,1321,1400,2026-11-05 15:00,2026-11-05 23:00
+S8125,Hosur Plant,Dharwad Depot,Shree Ganesh Transport,SH-SKU-04,630,800,2026-11-05 13:00,2026-11-05 23:00
+S8126,Hosur Plant,Kalaburagi Depot,Vega Logistics,SH-SKU-01,752,800,2026-11-05 18:00,2026-11-06 07:24
+S8127,Tumakuru Plant,Davangere Depot,Coastal Carriers,SH-SKU-10,600,800,2026-11-05 16:00,2026-11-05 21:30
+S8128,Tumakuru Plant,Belagavi Depot,Deccan Roadlines,SH-SKU-09,531,800,2026-11-05 06:00,2026-11-05 15:30
+S8129,Hosur Plant,Kolar Depot,Coastal Carriers,SH-SKU-11,760,800,2026-11-06 07:00,2026-11-06 11:48
+S8130,Tumakuru Plant,Kolar Depot,Deccan Roadlines,SH-SKU-06,549,800,2026-11-06 15:00,2026-11-06 18:30
+S8131,Hosur Plant,Mangaluru Depot,Swift Freight,SH-SKU-08,1075,1400,2026-11-06 09:00,2026-11-06 19:00
+S8132,Hosur Plant,Kolar Depot,Vega Logistics,SH-SKU-09,1061,1400,2026-11-06 15:00,2026-11-06 19:48
+S8133,Hosur Plant,Kolar Depot,Coastal Carriers,SH-SKU-03,929,1400,2026-11-06 08:00,2026-11-06 12:48
+S8134,Hosur Plant,Shivamogga Depot,Swift Freight,SH-SKU-07,1350,1400,2026-11-07 12:00,2026-11-07 19:42
+S8135,Tumakuru Plant,Hubli Depot,Deccan Roadlines,SH-SKU-12,1305,1400,2026-11-07 16:00,2026-11-07 23:30
+S8136,Hosur Plant,Shivamogga Depot,Swift Freight,SH-SKU-03,712,800,2026-11-07 15:00,2026-11-07 22:42
+S8137,Tumakuru Plant,Kalaburagi Depot,Swift Freight,SH-SKU-03,1124,1400,2026-11-07 06:00,2026-11-07 17:00
+S8138,Tumakuru Plant,Mangaluru Depot,Kaveri Movers,SH-SKU-07,1070,1400,2026-11-07 17:00,2026-11-08 01:00
+S8139,Tumakuru Plant,Hassan Depot,Shree Ganesh Transport,SH-SKU-01,1283,1400,2026-11-07 07:00,2026-11-07 11:00
+S8140,Hosur Plant,Mangaluru Depot,Deccan Roadlines,SH-SKU-01,1203,1400,2026-11-07 11:00,2026-11-07 21:00
+S8141,Tumakuru Plant,Hassan Depot,Coastal Carriers,SH-SKU-04,857,1400,2026-11-07 06:00,2026-11-07 10:00
+S8142,Hosur Plant,Chikkamagaluru Depot,Swift Freight,SH-SKU-11,651,800,2026-11-08 15:00,2026-11-08 22:06
+S8143,Tumakuru Plant,Chitradurga Depot,Vega Logistics,SH-SKU-07,898,1400,2026-11-08 05:00,2026-11-08 09:00
+S8144,Tumakuru Plant,Davangere Depot,Deccan Roadlines,SH-SKU-09,1242,1400,2026-11-08 17:00,2026-11-08 22:30
+S8145,Hosur Plant,Chitradurga Depot,Vega Logistics,SH-SKU-05,781,800,2026-11-08 05:00,2026-11-08 10:24
+S8146,Tumakuru Plant,Shivamogga Depot,Vega Logistics,SH-SKU-02,1388,1400,2026-11-08 19:00,2026-11-09 01:00
+S8147,Tumakuru Plant,Chitradurga Depot,Deccan Roadlines,SH-SKU-06,758,800,2026-11-08 05:00,2026-11-08 09:00
+S8148,Tumakuru Plant,Belagavi Depot,Vega Logistics,SH-SKU-12,588,800,2026-11-09 09:00,2026-11-09 18:30
+S8149,Tumakuru Plant,Ballari Depot,Coastal Carriers,SH-SKU-09,810,1400,2026-11-09 13:00,2026-11-09 19:30
+S8150,Tumakuru Plant,Udupi Depot,Vega Logistics,SH-SKU-09,1061,1400,2026-11-09 07:00,2026-11-09 16:00
+S8151,Tumakuru Plant,Mangaluru Depot,Kaveri Movers,SH-SKU-09,1140,1400,2026-11-09 05:00,2026-11-09 13:00
+S8152,Hosur Plant,Chitradurga Depot,Swift Freight,SH-SKU-07,1070,1400,2026-11-09 07:00,2026-11-09 12:24
+S8153,Hosur Plant,Shivamogga Depot,Vega Logistics,SH-SKU-01,582,800,2026-11-09 17:00,2026-11-10 00:42
+S8154,Hosur Plant,Chitradurga Depot,Vega Logistics,SH-SKU-10,1164,1400,2026-11-09 15:00,2026-11-09 20:24
+S8155,Hosur Plant,Kalaburagi Depot,Deccan Roadlines,SH-SKU-12,834,1400,2026-11-09 11:00,2026-11-10 00:24
+S8156,Hosur Plant,Mysuru Depot,Vega Logistics,SH-SKU-09,690,800,2026-11-10 08:00,2026-11-10 12:48
+S8157,Hosur Plant,Shivamogga Depot,Shree Ganesh Transport,SH-SKU-12,518,800,2026-11-10 17:00,2026-11-11 00:42
+S8158,Hosur Plant,Mangaluru Depot,Vega Logistics,SH-SKU-09,849,1400,2026-11-10 15:00,2026-11-11 01:00
+S8159,Tumakuru Plant,Kolar Depot,Kaveri Movers,SH-SKU-02,636,800,2026-11-10 05:00,2026-11-10 08:30
+S8160,Tumakuru Plant,Chikkamagaluru Depot,Kaveri Movers,SH-SKU-11,1216,1400,2026-11-10 05:00,2026-11-10 10:30
+S8161,Tumakuru Plant,Hassan Depot,Deccan Roadlines,SH-SKU-09,1304,1400,2026-11-10 15:00,2026-11-10 19:00
+S8162,Tumakuru Plant,Mandya Depot,Deccan Roadlines,SH-SKU-04,1165,1400,2026-11-10 12:00,2026-11-10 14:30
+S8163,Tumakuru Plant,Dharwad Depot,Vega Logistics,SH-SKU-02,785,800,2026-11-10 06:00,2026-11-10 14:00
+S8164,Hosur Plant,Belagavi Depot,Deccan Roadlines,SH-SKU-07,892,1400,2026-11-11 16:00,2026-11-12 03:42
+S8165,Hosur Plant,Belagavi Depot,Shree Ganesh Transport,SH-SKU-09,635,800,2026-11-11 08:00,2026-11-11 19:42
+S8166,Hosur Plant,Hubli Depot,Swift Freight,SH-SKU-05,501,800,2026-11-11 18:00,2026-11-12 03:24
+S8167,Hosur Plant,Chikkamagaluru Depot,Shree Ganesh Transport,SH-SKU-12,853,1400,2026-11-11 05:00,2026-11-11 12:06
+S8168,Tumakuru Plant,Mysuru Depot,Coastal Carriers,SH-SKU-06,1064,1400,2026-11-11 07:00,2026-11-11 10:30
+S8169,Hosur Plant,Ballari Depot,Shree Ganesh Transport,SH-SKU-09,843,1400,2026-11-12 05:00,2026-11-12 13:18
+S8170,Hosur Plant,Hassan Depot,Deccan Roadlines,SH-SKU-02,1294,1400,2026-11-12 06:00,2026-11-12 11:24
+S8171,Hosur Plant,Belagavi Depot,Kaveri Movers,SH-SKU-11,526,800,2026-11-12 07:00,2026-11-12 18:42
+S8172,Tumakuru Plant,Udupi Depot,Kaveri Movers,SH-SKU-08,1286,1400,2026-11-12 16:00,2026-11-13 01:00
+S8173,Tumakuru Plant,Chikkamagaluru Depot,Deccan Roadlines,SH-SKU-02,554,800,2026-11-12 07:00,2026-11-12 12:30
+S8174,Hosur Plant,Dharwad Depot,Swift Freight,SH-SKU-05,1049,1400,2026-11-12 15:00,2026-11-13 01:00
+S8175,Tumakuru Plant,Dharwad Depot,Kaveri Movers,SH-SKU-04,919,1400,2026-11-12 18:00,2026-11-13 02:00
+S8176,Tumakuru Plant,Udupi Depot,Swift Freight,SH-SKU-12,1197,1400,2026-11-13 09:00,2026-11-13 18:00
+S8177,Tumakuru Plant,Belagavi Depot,Deccan Roadlines,SH-SKU-05,1015,1400,2026-11-13 09:00,2026-11-13 18:30
+S8178,Tumakuru Plant,Belagavi Depot,Coastal Carriers,SH-SKU-07,1317,1400,2026-11-13 09:00,2026-11-13 18:30
+S8179,Tumakuru Plant,Hubli Depot,Shree Ganesh Transport,SH-SKU-08,629,800,2026-11-13 11:00,2026-11-13 18:30
+S8180,Hosur Plant,Davangere Depot,Shree Ganesh Transport,SH-SKU-03,736,800,2026-11-13 14:00,2026-11-13 21:06
+S8181,Hosur Plant,Chitradurga Depot,Coastal Carriers,SH-SKU-09,1030,1400,2026-11-13 07:00,2026-11-13 12:24
+S8182,Tumakuru Plant,Chikkamagaluru Depot,Swift Freight,SH-SKU-10,1150,1400,2026-11-13 14:00,2026-11-13 19:30
+S8183,Hosur Plant,Shivamogga Depot,Deccan Roadlines,SH-SKU-08,794,800,2026-11-14 13:00,2026-11-14 20:42
+S8184,Hosur Plant,Kolar Depot,Shree Ganesh Transport,SH-SKU-05,1200,1400,2026-11-14 18:00,2026-11-14 22:48
+S8185,Hosur Plant,Belagavi Depot,Shree Ganesh Transport,SH-SKU-06,630,800,2026-11-14 09:00,2026-11-14 20:42
+S8186,Hosur Plant,Belagavi Depot,Vega Logistics,SH-SKU-02,1390,1400,2026-11-14 18:00,2026-11-15 05:42
+S8187,Tumakuru Plant,Hubli Depot,Vega Logistics,SH-SKU-10,1082,1400,2026-11-14 07:00,2026-11-14 14:30
+S8188,Tumakuru Plant,Hubli Depot,Deccan Roadlines,SH-SKU-09,1144,1400,2026-11-14 09:00,2026-11-14 16:30
+S8189,Tumakuru Plant,Ballari Depot,Kaveri Movers,SH-SKU-04,1399,1400,2026-11-14 08:00,2026-11-14 14:30
+S8190,Hosur Plant,Mandya Depot,Coastal Carriers,SH-SKU-06,642,800,2026-11-14 17:00,2026-11-14 20:42
+S8191,Tumakuru Plant,Kolar Depot,Deccan Roadlines,SH-SKU-09,1242,1400,2026-11-15 11:00,2026-11-15 14:30
+S8192,Hosur Plant,Dharwad Depot,Deccan Roadlines,SH-SKU-07,1076,1400,2026-11-15 13:00,2026-11-15 23:00
+S8193,Hosur Plant,Chitradurga Depot,Coastal Carriers,SH-SKU-10,1023,1400,2026-11-15 10:00,2026-11-15 15:24
+S8194,Tumakuru Plant,Belagavi Depot,Swift Freight,SH-SKU-06,844,1400,2026-11-15 17:00,2026-11-16 02:30
+S8195,Tumakuru Plant,Hubli Depot,Deccan Roadlines,SH-SKU-10,725,800,2026-11-15 18:00,2026-11-16 01:30
+S8196,Tumakuru Plant,Kalaburagi Depot,Deccan Roadlines,SH-SKU-03,1077,1400,2026-11-16 06:51,2026-11-16 17:51
+S8197,Hosur Plant,Hassan Depot,Kaveri Movers,SH-SKU-03,859,1400,2026-11-16 07:55,2026-11-16 13:19
+S8198,Hosur Plant,Belagavi Depot,Shree Ganesh Transport,SH-SKU-08,1128,1400,2026-11-16 06:41,2026-11-16 18:23
+S8199,Tumakuru Plant,Udupi Depot,Kaveri Movers,SH-SKU-06,718,1400,2026-11-16 08:50,2026-11-16 17:50
+S8200,Hosur Plant,Kalaburagi Depot,Coastal Carriers,SH-SKU-01,670,1400,2026-11-16 06:20,2026-11-16 19:44
+S8201,Hosur Plant,Mandya Depot,Vega Logistics,SH-SKU-12,1180,1400,2026-11-16 09:17,2026-11-16 12:59
+S8202,Tumakuru Plant,Chitradurga Depot,Coastal Carriers,SH-SKU-05,733,1400,2026-11-16 08:38,2026-11-16 12:38
+S8203,Tumakuru Plant,Chikkamagaluru Depot,Vega Logistics,SH-SKU-01,742,1400,2026-11-16 07:38,2026-11-16 13:08
+S8204,Hosur Plant,Belagavi Depot,Vega Logistics,SH-SKU-03,713,1400,2026-11-16 06:05,2026-11-16 17:47
+S8205,Tumakuru Plant,Ballari Depot,Kaveri Movers,SH-SKU-08,676,1400,2026-11-16 08:49,2026-11-16 15:19
+S8206,Hosur Plant,Mangaluru Depot,Coastal Carriers,SH-SKU-09,1201,1400,2026-11-16 07:01,2026-11-16 17:01
+S8207,Tumakuru Plant,Dharwad Depot,Swift Freight,SH-SKU-08,679,1400,2026-11-16 08:32,2026-11-16 16:32
+S8208,Tumakuru Plant,Dharwad Depot,Shree Ganesh Transport,SH-SKU-07,1339,1400,2026-11-16 07:41,2026-11-16 15:41
+S8209,Tumakuru Plant,Kalaburagi Depot,Deccan Roadlines,SH-SKU-10,1382,1400,2026-11-16 07:55,2026-11-16 18:55
+S8210,Hosur Plant,Udupi Depot,Swift Freight,SH-SKU-03,656,1400,2026-11-16 09:22,2026-11-16 20:34
+S8211,Hosur Plant,Ballari Depot,Vega Logistics,SH-SKU-09,557,1400,2026-11-16 07:55,2026-11-16 16:13
+S8212,Tumakuru Plant,Kolar Depot,Shree Ganesh Transport,SH-SKU-06,666,1400,2026-11-16 06:18,2026-11-16 09:48
+S8213,Hosur Plant,Hubli Depot,Shree Ganesh Transport,SH-SKU-01,1241,1400,2026-11-16 06:18,2026-11-16 15:42
+S9001,Tumakuru Plant,Hubli Depot,Shree Ganesh Transport,SH-SKU-01,1200,1400,2026-11-16 05:00,2026-11-16 12:30
+S9014,Hosur Plant,Mysuru Depot,Swift Freight,SH-SKU-06,700,800,2026-11-16 07:00,2026-11-16 11:48
+S9020,Tumakuru Plant,Shivamogga Depot,Deccan Roadlines,SH-SKU-01,1000,1400,2026-11-16 06:00,2026-11-16 12:00
+S9031,Tumakuru Plant,Dharwad Depot,Vega Logistics,SH-SKU-01,800,800,2026-11-16 09:00,2026-11-16 17:00
+S9040,Tumakuru Plant,Mandya Depot,Kaveri Movers,SH-SKU-07,320,800,2026-11-17 07:00,2026-11-17 09:30
+S9041,Tumakuru Plant,Mysuru Depot,Kaveri Movers,SH-SKU-07,360,800,2026-11-17 07:00,2026-11-17 10:30

@@ -1,0 +1,26 @@
+po,supplier,component,qty,expected_date,status
+PO-501,Kirloskar Ferrous,C-152,200,2026-11-27,Confirmed
+PO-502,Rane Components,C-101,1000,2026-11-28,Confirmed
+PO-503,SKF Distribution,C-238,500,2026-11-23,Confirmed
+PO-504,Bharat Forge Supplies,C-110,200,2026-11-25,Confirmed
+PO-505,Kirloskar Ferrous,C-195,1000,2026-11-21,Open
+PO-506,SKF Distribution,C-244,500,2026-11-21,Confirmed
+PO-507,Bharat Forge Supplies,C-185,500,2026-11-22,Confirmed
+PO-508,Hosur Precision Works,C-204,500,2026-11-21,Open
+PO-509,SKF Distribution,C-136,1000,2026-11-28,Open
+PO-510,Hosur Precision Works,C-165,200,2026-11-23,Open
+PO-511,Rane Components,C-213,200,2026-11-19,Open
+PO-512,SKF Distribution,C-122,500,2026-11-22,Open
+PO-513,Mahle Castings,C-215,500,2026-11-28,Open
+PO-514,Sundram Fasteners,C-243,1000,2026-11-28,Confirmed
+PO-515,Rane Components,C-159,500,2026-11-21,Open
+PO-516,Hosur Precision Works,C-223,200,2026-11-25,Confirmed
+PO-517,Kirloskar Ferrous,C-167,1000,2026-11-23,Confirmed
+PO-518,Sundram Fasteners,C-211,500,2026-11-27,Confirmed
+PO-519,Hosur Precision Works,C-169,500,2026-11-25,Confirmed
+PO-520,SKF Distribution,C-231,200,2026-11-23,Confirmed
+PO-0531,SKF Distribution,C-114,1000,2026-11-13,Delayed – supplier revised ETA 2026-11-20
+PO-0538,Bharat Forge Supplies,C-207,2000,2026-11-26,Delayed – forging capacity
+PO-0544,Rane Components,C-118,1500,2026-11-17,Confirmed
+PO-0549,Kirloskar Ferrous,C-412,600,2026-11-25,Confirmed
+PO-0552,Rane Components,C-150,3000,2026-11-22,Confirmed

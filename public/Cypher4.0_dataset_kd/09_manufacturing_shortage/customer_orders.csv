@@ -1,0 +1,12 @@
+order,customer,product,qty,due_date,priority,late_penalty
+SO-3100,Tata AutoComp,AX-200,500,2026-11-18,High,1.5% per day
+SO-3101,Force Motors,AX-150,1200,2026-11-20,Medium,1.0% per day
+SO-3102,TVS Motor,AX-310,400,2026-11-21,Medium,0.5% per day
+SO-3103,Force Motors,AX-150,1000,2026-11-22,Medium,1.0% per day
+SO-3104,Eicher Motors,AX-310,350,2026-11-25,Medium,0.5% per day
+SO-3105,TVS Motor,AX-450,300,2026-11-25,Medium,0.5% per day
+SO-3106,TVS Motor,AX-150,1100,2026-11-25,High,0.5% per day
+SO-3107,Mahindra Swaraj,AX-200,450,2026-11-27,Medium,1.0% per day
+SO-3108,Mahindra Swaraj,AX-450,400,2026-11-28,High,2% per day
+SO-3109,Ashok Leyland,AX-310,380,2026-12-01,Medium,1.0% per day
+SO-3110,Force Motors,AX-150,900,2026-11-30,Medium,0.5% per day

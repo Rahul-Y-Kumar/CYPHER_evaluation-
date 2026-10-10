@@ -327,20 +327,40 @@ export const ProblemStatementsPage: React.FC<ProblemStatementsPageProps> = ({
                     paddingTop: '1.25rem',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
+                    gap: '0.5rem',
                   }}
                 >
                   <Button
-                    variant="primary"
+                    variant="outline"
                     size="sm"
-                    rollText={true}
-                    arrow={true}
                     onClick={() => handleOpenModal(ps)}
                     icon={<FileText size={14} />}
-                    style={{ width: '100%' }}
                   >
-                    VIEW PROBLEM BRIEF ↗
+                    FULL BRIEF
                   </Button>
+
+                  {ps.sponsor === "KD's Garage" ? (
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      rollText={true}
+                      arrow={true}
+                      onClick={() => onSelectTab('resources')}
+                    >
+                      VIEW DATASETS ↗
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      rollText={true}
+                      arrow={true}
+                      onClick={() => handleOpenModal(ps)}
+                    >
+                      INSPECT SPEC ↗
+                    </Button>
+                  )}
                 </div>
               </NeoCard>
             ))
@@ -423,9 +443,23 @@ export const ProblemStatementsPage: React.FC<ProblemStatementsPageProps> = ({
 
               {/* Modal Actions */}
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', borderTop: '1px solid var(--line)', paddingTop: '1.25rem' }}>
-                <Button variant="primary" size="md" onClick={handleClose}>
+                <Button variant="outline" size="md" onClick={handleClose}>
                   CLOSE BRIEF
                 </Button>
+                {activeModalPS.sponsor === "KD's Garage" && (
+                  <Button
+                    variant="primary"
+                    size="md"
+                    rollText={true}
+                    arrow={true}
+                    onClick={() => {
+                      handleClose();
+                      onSelectTab('resources');
+                    }}
+                  >
+                    DOWNLOAD DATASET ↗
+                  </Button>
+                )}
               </div>
             </div>
           </Modal>

@@ -1,0 +1,43 @@
+customer,depot,sku,qty_cases,promised_delivery,priority
+Retailer-01,Dharwad Depot,SH-SKU-05,267,2026-11-17 18:00,Low
+Retailer-02,Davangere Depot,SH-SKU-02,284,2026-11-16 18:00,Low
+Retailer-03,Hubli Depot,SH-SKU-09,96,2026-11-17 18:00,Medium
+Retailer-04,Ballari Depot,SH-SKU-03,168,2026-11-16 18:00,Low
+Retailer-05,Kalaburagi Depot,SH-SKU-05,283,2026-11-17 18:00,High
+Retailer-06,Chikkamagaluru Depot,SH-SKU-06,146,2026-11-16 18:00,Low
+Retailer-07,Kalaburagi Depot,SH-SKU-06,123,2026-11-17 18:00,High
+Retailer-08,Mandya Depot,SH-SKU-02,149,2026-11-18 18:00,Medium
+Retailer-09,Mandya Depot,SH-SKU-04,103,2026-11-17 18:00,Low
+Retailer-10,Chitradurga Depot,SH-SKU-12,158,2026-11-18 18:00,Low
+Retailer-11,Dharwad Depot,SH-SKU-10,259,2026-11-16 18:00,Low
+Retailer-12,Ballari Depot,SH-SKU-10,249,2026-11-16 18:00,High
+Retailer-13,Kolar Depot,SH-SKU-06,136,2026-11-17 18:00,Medium
+Retailer-14,Mangaluru Depot,SH-SKU-12,241,2026-11-18 18:00,Low
+Retailer-15,Chikkamagaluru Depot,SH-SKU-05,66,2026-11-18 18:00,Low
+Retailer-16,Belagavi Depot,SH-SKU-03,108,2026-11-17 18:00,Medium
+Retailer-17,Dharwad Depot,SH-SKU-03,203,2026-11-17 18:00,Low
+Retailer-18,Mandya Depot,SH-SKU-04,259,2026-11-17 18:00,Low
+Retailer-19,Mangaluru Depot,SH-SKU-11,253,2026-11-18 18:00,Medium
+Retailer-20,Ballari Depot,SH-SKU-10,286,2026-11-18 18:00,High
+Retailer-21,Hubli Depot,SH-SKU-01,239,2026-11-17 18:00,High
+Retailer-22,Mangaluru Depot,SH-SKU-01,55,2026-11-17 18:00,High
+Retailer-23,Shivamogga Depot,SH-SKU-03,267,2026-11-18 18:00,Medium
+Retailer-24,Mangaluru Depot,SH-SKU-08,233,2026-11-17 18:00,Low
+Retailer-25,Chikkamagaluru Depot,SH-SKU-04,100,2026-11-18 18:00,High
+Retailer-26,Kolar Depot,SH-SKU-12,170,2026-11-18 18:00,Low
+Retailer-27,Hubli Depot,SH-SKU-07,288,2026-11-16 18:00,Low
+Retailer-28,Shivamogga Depot,SH-SKU-05,203,2026-11-18 18:00,Low
+Retailer-29,Ballari Depot,SH-SKU-12,158,2026-11-18 18:00,Low
+Retailer-30,Shivamogga Depot,SH-SKU-08,284,2026-11-16 18:00,Medium
+Retailer-31,Kolar Depot,SH-SKU-05,263,2026-11-17 18:00,Medium
+Retailer-32,Udupi Depot,SH-SKU-04,75,2026-11-18 18:00,Medium
+Retailer-33,Kolar Depot,SH-SKU-05,270,2026-11-18 18:00,Medium
+Retailer-34,Chitradurga Depot,SH-SKU-06,150,2026-11-17 18:00,High
+Retailer-35,Belagavi Depot,SH-SKU-02,126,2026-11-18 18:00,Medium
+Retailer-36,Hubli Depot,SH-SKU-01,279,2026-11-17 18:00,Medium
+Retailer-37,Udupi Depot,SH-SKU-07,241,2026-11-18 18:00,High
+Retailer-38,Hassan Depot,SH-SKU-10,93,2026-11-17 18:00,Low
+Retailer-39,Davangere Depot,SH-SKU-02,114,2026-11-17 18:00,High
+Retailer-40,Udupi Depot,SH-SKU-05,140,2026-11-16 18:00,Low
+Reliance Smart Hubli,Hubli Depot,SH-SKU-01,400,2026-11-17 12:00,High
+Metro Cash & Carry Mysuru,Mysuru Depot,SH-SKU-06,150,2026-11-16 18:00,High

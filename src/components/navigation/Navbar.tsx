@@ -18,9 +18,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks: { id: NavigationTab; label: string; num: string }[] = [
     { id: 'home', label: 'HOME', num: '01' },
     { id: 'problems', label: 'PROBLEM STATEMENTS', num: '02' },
-    // { id: 'resources', label: 'RESOURCES & DATASETS', num: '03' }, // Hidden until datasets release
-    { id: 'results', label: 'LEADERBOARD', num: '03' },
-    { id: 'how-it-works', label: 'EVALUATION PROTOCOL', num: '04' },
+    { id: 'resources', label: 'RESOURCES & DATASETS', num: '03' },
+    { id: 'results', label: 'LEADERBOARD', num: '04' },
+    { id: 'how-it-works', label: 'EVALUATION PROTOCOL', num: '05' },
   ];
 
   const handleNavClick = (id: NavigationTab) => {
@@ -66,7 +66,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: '4.5rem',
+            minHeight: '4.75rem',
+            paddingTop: '0.4rem',
+            paddingBottom: '0.4rem',
             gap: '1rem',
           }}
         >
@@ -79,13 +81,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               gap: '0.75rem',
               cursor: 'pointer',
               userSelect: 'none',
+              padding: '0.25rem 0',
             }}
           >
             <img
               src="/Rotaract_logo_white.png"
               alt="Rotaract Club of Atria IT"
               style={{
-                height: '46px',
+                height: '58px',
+                maxHeight: '62px',
                 width: 'auto',
                 objectFit: 'contain',
                 display: 'block',
