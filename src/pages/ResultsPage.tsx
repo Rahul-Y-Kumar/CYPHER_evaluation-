@@ -5,16 +5,18 @@ import {
   CheckCircle2, 
   XCircle, 
   Users, 
-  Award,
-  ChevronRight,
-  FileText
+  FileText,
+  Building,
+  RefreshCw,
+  Eye,
+  SlidersHorizontal
 } from 'lucide-react';
 import { NeoCard } from '../components/ui/NeoCard';
 import { TechnicalLabel } from '../components/ui/TechnicalLabel';
 import { StatusBadge } from '../components/ui/StatusBadge';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
-import { CSVEvaluationService, type TeamEvaluationRecord } from '../services/csvEvaluationService';
+import { CSVEvaluationService, type TeamLeaderboardRecord } from '../services/csvEvaluationService';
 import type { NavigationTab } from '../types';
 
 interface ResultsPageProps {
@@ -23,43 +25,52 @@ interface ResultsPageProps {
 }
 
 export const ResultsPage: React.FC<ResultsPageProps> = ({ onSelectTab }) => {
-  const [evaluations, setEvaluations] = useState<TeamEvaluationRecord[]>([]);
-  const [selectedPassFilter, setSelectedPassFilter] = useState<string>('ALL');
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>('ALL');
+  const [teams, setTeams] = useState<TeamLeaderboardRecord[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<'ALL' | 'ATRIANS' | 'NON-ATRIANS'>('ALL');
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState<'ALL' | 'SELECTED' | 'ELIMINATED'>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedTeamModal, setSelectedTeamModal] = useState<TeamEvaluationRecord | null>(null);
+  const [selectedTeamModal, setSelectedTeamModal] = useState<TeamLeaderboardRecord | null>(null);
+
+  const loadData = async () => {
+    setIsLoading(true);
+    const records = await CSVEvaluationService.fetchOfficialDatasets();
+    setTeams(records);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    try {
-      localStorage.removeItem('cypher4_evaluations_v1');
-      localStorage.removeItem('cypher4_mock_teams');
-    } catch {}
-    const data = CSVEvaluationService.getEvaluations();
-    setEvaluations(data);
+    loadData();
   }, []);
 
-  // Filter evaluations
-  const filteredTeams = evaluations.filter((t) => {
-    const matchesPass = selectedPassFilter === 'ALL' || t.passType === selectedPassFilter;
+  // Filter teams based on Category (Atrians / Non-Atrians), Status, and Search Query
+  const filteredTeams = teams.filter((t) => {
+    const matchesCategory =
+      selectedCategoryFilter === 'ALL' || t.category === selectedCategoryFilter;
+
     const matchesStatus =
-      selectedStatusFilter === 'ALL' ||
-      (selectedStatusFilter === 'SELECTED' && t.status === 'SELECTED') ||
-      (selectedStatusFilter === 'ELIMINATED' && t.status === 'ELIMINATED');
+      selectedStatusFilter === 'ALL' || t.status === selectedStatusFilter;
 
+    const query = searchQuery.toLowerCase().trim();
     const matchesSearch =
-      t.teamName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.teamLeader.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.collegeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.problemStatementCode.toLowerCase().includes(searchQuery.toLowerCase());
+      query === '' ||
+      t.teamName.toLowerCase().includes(query) ||
+      t.teamLeader.toLowerCase().includes(query) ||
+      t.collegeName.toLowerCase().includes(query) ||
+      t.problemStatementCode.toLowerCase().includes(query) ||
+      t.problemStatementTitle.toLowerCase().includes(query) ||
+      t.members.some((m) => m.toLowerCase().includes(query));
 
-    return matchesPass && matchesStatus && matchesSearch;
+    return matchesCategory && matchesStatus && matchesSearch;
   });
 
-  // Metrics
-  const totalTeams = evaluations.length;
-  const selectedCount = evaluations.filter((t) => t.status === 'SELECTED').length;
-  const eliminatedCount = evaluations.filter((t) => t.status === 'ELIMINATED').length;
+  // Calculate high-level summary metrics
+  const totalEvaluated = teams.length;
+  const selectedCount = teams.filter((t) => t.status === 'SELECTED').length;
+  const eliminatedCount = teams.filter((t) => t.status === 'ELIMINATED').length;
+
+  const atriansCount = teams.filter((t) => t.category === 'ATRIANS').length;
+  const nonAtriansCount = teams.filter((t) => t.category === 'NON-ATRIANS').length;
 
   return (
     <div style={{ position: 'relative', zIndex: 1, paddingTop: '3rem', paddingBottom: '6rem' }}>
@@ -70,14 +81,28 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({ onSelectTab }) => {
             <TechnicalLabel color="cyan" variant="bracket">
               04 // HACKATHON LEADERBOARD
             </TechnicalLabel>
-            <StatusBadge status="RESULTS YET TO BE ANNOUNCED" variant="acid" pulse />
+            <StatusBadge status="ROUND 01 EVALUATION RESULTS" variant="acid" />
           </div>
-          <h1 className="display-hero" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: 'var(--white)', marginBottom: '0.75rem', marginTop: '0.35rem' }}>
-            OFFICIAL <span style={{ color: 'var(--acid)' }}>LEADERBOARD</span>
-          </h1>
-          <p style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '680px', lineHeight: '1.6' }}>
-            Live ranking and evaluation standings for all participating teams in CYPHER 4.0. Results yet to be announced — official scorecards will be published here following workstation reviews.
-          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1.5rem', marginTop: '0.35rem' }}>
+            <div>
+              <h1 className="display-hero" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: 'var(--white)', marginBottom: '0.75rem' }}>
+                ROUND 01 <span style={{ color: 'var(--acid)' }}>LEADERBOARD</span>
+              </h1>
+              <p style={{ color: 'var(--muted)', fontSize: '1rem', maxWidth: '680px', lineHeight: '1.6' }}>
+                Official Round 1 Evaluation standings for CYPHER 4.0. Displays verified team results segregated by qualification outcome for both Atrian and Non-Atrian tracks.
+              </p>
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={loadData}
+              icon={<RefreshCw size={14} className={isLoading ? 'animate-spin' : ''} />}
+              style={{ alignSelf: 'center' }}
+            >
+              SYNC DATA
+            </Button>
+          </div>
         </div>
 
         {/* 3 Metric NeoCards */}
@@ -92,420 +117,378 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({ onSelectTab }) => {
           {/* Stat 1: Total Evaluated */}
           <NeoCard variant="featured" style={{ padding: '1.25rem' }}>
             <TechnicalLabel color="cyan" variant="tag">
-              TOTAL TEAMS
+              EVALUATED TEAMS
             </TechnicalLabel>
-            <div className="font-display" style={{ fontSize: '2.8rem', color: totalTeams > 0 ? 'var(--white)' : 'var(--muted)', lineHeight: 0.9, marginTop: '0.4rem' }}>
-              {totalTeams > 0 ? totalTeams : '--'}
+            <div className="font-display" style={{ fontSize: '2.8rem', color: 'var(--white)', lineHeight: 0.9, marginTop: '0.4rem' }}>
+              {totalEvaluated}
             </div>
             <div style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '0.4rem' }}>
-              {totalTeams > 0 ? 'Atrians & Non-Atrians' : 'Awaiting Judge Scorecards'}
+              {atriansCount} Atrians • {nonAtriansCount} Non-Atrians
             </div>
           </NeoCard>
 
-          {/* Stat 2: Selected Teams / Stage */}
+          {/* Stat 2: Selected Teams */}
           <NeoCard variant="featured" style={{ padding: '1.25rem', border: '2px solid var(--acid)' }}>
             <TechnicalLabel color="acid" variant="tag">
-              {totalTeams > 0 ? 'SELECTED TEAMS' : 'CURRENT STAGE'}
+              SELECTED TEAMS
             </TechnicalLabel>
-            <div className="font-display" style={{ fontSize: totalTeams > 0 ? '2.8rem' : '2rem', color: 'var(--acid)', lineHeight: 0.9, marginTop: '0.4rem' }}>
-              {totalTeams > 0 ? selectedCount : 'ROUND 01'}
+            <div className="font-display" style={{ fontSize: '2.8rem', color: 'var(--acid)', lineHeight: 0.9, marginTop: '0.4rem' }}>
+              {selectedCount}
             </div>
             <div style={{ fontSize: '0.72rem', color: 'var(--acid)', marginTop: '0.4rem', fontWeight: 700 }}>
-              {totalTeams > 0 ? 'Qualified for Next Stage' : 'Workstation Review Active'}
+              Qualified for Round 2
             </div>
           </NeoCard>
 
-          {/* Stat 3: Other Status */}
+          {/* Stat 3: Eliminated Teams */}
           <NeoCard variant="featured" style={{ padding: '1.25rem' }}>
             <TechnicalLabel color="muted" variant="tag">
-              {totalTeams > 0 ? 'NOT SELECTED' : 'STANDINGS STATUS'}
+              ELIMINATED TEAMS
             </TechnicalLabel>
-            <div className="font-display" style={{ fontSize: totalTeams > 0 ? '2.8rem' : '1.35rem', color: totalTeams > 0 ? 'var(--muted)' : 'var(--acid)', lineHeight: 1.1, marginTop: '0.4rem', fontWeight: 800 }}>
-              {totalTeams > 0 ? eliminatedCount : 'YET TO BE ANNOUNCED'}
+            <div className="font-display" style={{ fontSize: '2.8rem', color: 'var(--muted)', lineHeight: 0.9, marginTop: '0.4rem' }}>
+              {eliminatedCount}
             </div>
             <div style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '0.4rem' }}>
-              {totalTeams > 0 ? 'Round 1 Completed' : 'Scores Compilation Pending'}
+              Round 1 Concluded
             </div>
           </NeoCard>
         </div>
 
-        {/* If no evaluations yet: Sleek Neo-Brutalist Awaiting State */}
-        {totalTeams === 0 ? (
-          <NeoCard
-            variant="default"
-            style={{
-              padding: '3.5rem 2rem',
-              textAlign: 'center',
-              backgroundColor: 'var(--ink)',
-              border: '2px dashed var(--line)',
-            }}
-          >
-            <div
+        {/* Controls & Filter Bar */}
+        <NeoCard
+          variant="default"
+          style={{
+            padding: '1.25rem',
+            backgroundColor: 'var(--ink)',
+            marginBottom: '2rem',
+          }}
+        >
+          {/* Search Input for Fast Access */}
+          <div style={{ position: 'relative', marginBottom: '1.25rem' }}>
+            <Search
+              size={18}
+              color="var(--muted)"
+              style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }}
+            />
+            <input
+              type="text"
+              placeholder="Search by team name, team lead name, member names, problem statement, college..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               style={{
-                width: '64px',
-                height: '64px',
-                margin: '0 auto 1.5rem',
-                backgroundColor: 'var(--paper)',
-                border: '2px solid var(--acid)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '4px 4px 0 var(--acid)',
-              }}
-            >
-              <Trophy size={32} color="var(--acid)" />
-            </div>
-
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <StatusBadge status="RESULTS YET TO BE ANNOUNCED" variant="acid" pulse />
-              <StatusBadge status="ROUND 01 EVALUATION LIVE" variant="outline" />
-            </div>
-
-            <h3
-              style={{
-                fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
-                fontWeight: 900,
-                color: 'var(--white)',
-                marginBottom: '1rem',
-                letterSpacing: '0.04em',
-              }}
-            >
-              RESULTS YET TO BE ANNOUNCED
-            </h3>
-
-            <p
-              style={{
-                color: 'var(--muted)',
-                fontSize: '0.95rem',
-                maxWidth: '580px',
-                margin: '0 auto 2rem',
-                lineHeight: '1.65',
-              }}
-            >
-              Judges are currently reviewing team code repositories and physical workstations across all 14 challenge tracks. Official team rankings, qualification records, and score breakdowns will be announced and published here once evaluations conclude.
-            </p>
-
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                padding: '0.65rem 1.25rem',
+                width: '100%',
+                padding: '0.8rem 1rem 0.8rem 2.8rem',
                 background: 'var(--paper)',
-                border: '1px solid var(--line)',
+                border: '2px solid var(--line)',
+                color: 'var(--white)',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.75rem',
-                color: 'var(--cyan)',
+                fontSize: '0.85rem',
+                outline: 'none',
               }}
-            >
-              <span style={{ color: 'var(--acid)' }}>●</span>
-              <span>EVALUATION PROTOCOL ACTIVE // RESULTS YET TO BE ANNOUNCED</span>
+            />
+          </div>
+
+          {/* Filter Row: Category (Atrians / Non-Atrians) and Status (Selected / Eliminated) */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', alignItems: 'center', justifyContent: 'space-between' }}>
+            {/* Category Filter Buttons */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', alignItems: 'center' }}>
+              <TechnicalLabel color="cyan" style={{ marginRight: '0.35rem' }}>
+                CATEGORY:
+              </TechnicalLabel>
+              {[
+                { id: 'ALL', label: `ALL (${teams.length})` },
+                { id: 'ATRIANS', label: `ATRIANS (${atriansCount})` },
+                { id: 'NON-ATRIANS', label: `NON-ATRIANS (${nonAtriansCount})` },
+              ].map((c) => {
+                const isSelected = selectedCategoryFilter === c.id;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => setSelectedCategoryFilter(c.id as any)}
+                    style={{
+                      background: isSelected ? 'var(--cyan)' : 'var(--paper)',
+                      color: isSelected ? 'var(--ink)' : 'var(--white)',
+                      border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
+                      padding: '0.45rem 0.8rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      boxShadow: isSelected ? '2px 2px 0 var(--ink)' : 'none',
+                      transition: 'all 0.1s ease',
+                    }}
+                  >
+                    {c.label}
+                  </button>
+                );
+              })}
             </div>
-          </NeoCard>
-        ) : (
-          <>
-            {/* Controls & Filter Bar */}
-            <NeoCard
-              variant="default"
-              style={{
-                padding: '1.25rem',
-                backgroundColor: 'var(--ink)',
-                marginBottom: '2rem',
-              }}
-            >
-              {/* Search Input */}
-              <div style={{ position: 'relative', marginBottom: '1.25rem' }}>
-                <Search
-                  size={18}
-                  color="var(--muted)"
-                  style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }}
-                />
-                <input
-                  type="text"
-                  placeholder="Search by team name, leader, college, registration ID, problem statement..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '0.8rem 1rem 0.8rem 2.8rem',
-                    background: 'var(--paper)',
-                    border: '2px solid var(--line)',
-                    color: 'var(--white)',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.85rem',
-                    outline: 'none',
-                  }}
-                />
-              </div>
 
-              {/* Filter Row: Status, Pass Category */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
-                {/* Status Filter Buttons */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', alignItems: 'center' }}>
-                  <TechnicalLabel color="muted" style={{ marginRight: '0.35rem' }}>
-                    STATUS:
-                  </TechnicalLabel>
-                  {[
-                    { id: 'ALL', label: `ALL (${evaluations.length})` },
-                    { id: 'SELECTED', label: `SELECTED (${selectedCount})` },
-                    { id: 'ELIMINATED', label: `NOT SELECTED (${eliminatedCount})` },
-                  ].map((s) => {
-                    const isSelected = selectedStatusFilter === s.id;
+            {/* Status Filter Buttons */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', alignItems: 'center' }}>
+              <TechnicalLabel color="acid" style={{ marginRight: '0.35rem' }}>
+                STATUS:
+              </TechnicalLabel>
+              {[
+                { id: 'ALL', label: `ALL (${teams.length})` },
+                { id: 'SELECTED', label: `SELECTED (${selectedCount})` },
+                { id: 'ELIMINATED', label: `ELIMINATED (${eliminatedCount})` },
+              ].map((s) => {
+                const isSelected = selectedStatusFilter === s.id;
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => setSelectedStatusFilter(s.id as any)}
+                    style={{
+                      background: isSelected ? 'var(--acid)' : 'var(--paper)',
+                      color: isSelected ? 'var(--ink)' : 'var(--white)',
+                      border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
+                      padding: '0.45rem 0.8rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      boxShadow: isSelected ? '2px 2px 0 var(--ink)' : 'none',
+                      transition: 'all 0.1s ease',
+                    }}
+                  >
+                    {s.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </NeoCard>
+
+        {/* Live Leaderboard Table */}
+        <NeoCard variant="default" style={{ padding: '1.5rem', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+            <div>
+              <TechnicalLabel color="acid" variant="bracket">
+                ROUND 01 STANDINGS // {filteredTeams.length} TEAMS LISTED
+              </TechnicalLabel>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--white)', marginTop: '0.2rem' }}>
+                Team Evaluation Standings
+              </h3>
+            </div>
+          </div>
+
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.82rem' }}>
+              <thead>
+                <tr style={{ background: 'var(--ink)', borderBottom: '2px solid var(--line)', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--muted)' }}>
+                  <th style={{ padding: '0.75rem 0.75rem', border: '1px solid var(--line)', width: '70px', textAlign: 'center' }}>SL NO</th>
+                  <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>TEAM NAME</th>
+                  <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>PROBLEM STATEMENT</th>
+                  <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>TEAM LEAD</th>
+                  <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>CATEGORY</th>
+                  <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>STATUS</th>
+                  <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)', textAlign: 'right' }}>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredTeams.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} style={{ padding: '3.5rem 1rem', textAlign: 'center', color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+                      No teams found matching the selected search query or category filter.
+                    </td>
+                  </tr>
+                ) : (
+                  filteredTeams.map((team) => {
+                    const isSelected = team.status === 'SELECTED';
                     return (
-                      <button
-                        key={s.id}
-                        onClick={() => setSelectedStatusFilter(s.id)}
+                      <tr
+                        key={team.id}
                         style={{
-                          background: isSelected ? 'var(--acid)' : 'var(--paper)',
-                          color: isSelected ? 'var(--ink)' : 'var(--white)',
-                          border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
-                          padding: '0.4rem 0.75rem',
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.72rem',
-                          fontWeight: 800,
-                          cursor: 'pointer',
-                          boxShadow: isSelected ? '2px 2px 0 var(--ink)' : 'none',
+                          borderBottom: '1px solid var(--line)',
+                          background: isSelected ? 'rgba(234, 255, 0, 0.02)' : 'transparent',
+                          transition: 'background-color 0.1s ease',
                         }}
+                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(245, 244, 237, 0.04)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = isSelected ? 'rgba(234, 255, 0, 0.02)' : 'transparent')}
                       >
-                        {s.label}
-                      </button>
-                    );
-                  })}
-                </div>
+                        {/* Serial Number (SL NO) */}
+                        <td style={{ padding: '0.85rem 0.75rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--white)', border: '1px solid var(--line)', textAlign: 'center' }}>
+                          <span style={{ color: isSelected ? 'var(--acid)' : 'var(--muted)' }}>
+                            #{String(team.slNo).padStart(2, '0')}
+                          </span>
+                        </td>
 
-                {/* Pass Category Buttons (Atrians vs Non-Atrians) */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', alignItems: 'center' }}>
-                  <TechnicalLabel color="muted" style={{ marginRight: '0.35rem' }}>
-                    CATEGORY:
-                  </TechnicalLabel>
-                  {['ALL', 'ATRIANS', 'NON-ATRIANS'].map((pass) => {
-                    const isSelected = selectedPassFilter === pass;
-                    return (
-                      <button
-                        key={pass}
-                        onClick={() => setSelectedPassFilter(pass)}
-                        style={{
-                          background: isSelected ? 'var(--cyan)' : 'var(--paper)',
-                          color: isSelected ? 'var(--ink)' : 'var(--white)',
-                          border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
-                          padding: '0.4rem 0.75rem',
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.72rem',
-                          fontWeight: 800,
-                          cursor: 'pointer',
-                          boxShadow: isSelected ? '2px 2px 0 var(--ink)' : 'none',
-                        }}
-                      >
-                        {pass}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </NeoCard>
+                        {/* Team Name */}
+                        <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)' }}>
+                          <div style={{ fontWeight: 800, color: 'var(--white)', fontSize: '0.95rem' }}>
+                            {team.teamName}
+                          </div>
+                          <div style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '0.15rem' }}>
+                            {team.collegeName}
+                          </div>
+                        </td>
 
-            {/* Live Leaderboard Table */}
-            <NeoCard variant="default" style={{ padding: '1.5rem', overflow: 'hidden' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-                <div>
-                  <TechnicalLabel color="acid" variant="bracket">
-                    STANDINGS // {filteredTeams.length} TEAMS LISTED
-                  </TechnicalLabel>
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--white)', marginTop: '0.2rem' }}>
-                    Team Standings
-                  </h3>
-                </div>
-              </div>
+                        {/* Problem Statement */}
+                        <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                            <span
+                              className="font-mono"
+                              style={{
+                                padding: '0.2rem 0.45rem',
+                                background: 'var(--ink)',
+                                color: 'var(--acid)',
+                                border: '1px solid var(--line)',
+                                fontWeight: 800,
+                                fontSize: '0.72rem',
+                              }}
+                            >
+                              {team.problemStatementCode}
+                            </span>
+                            <span style={{ fontSize: '0.78rem', color: 'var(--white)', maxWidth: '240px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              {team.problemStatementTitle}
+                            </span>
+                          </div>
+                        </td>
 
-              <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.82rem' }}>
-                  <thead>
-                    <tr style={{ background: 'var(--ink)', borderBottom: '2px solid var(--line)', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--muted)' }}>
-                      <th style={{ padding: '0.75rem 0.75rem', border: '1px solid var(--line)', width: '60px', textAlign: 'center' }}>RANK</th>
-                      <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>REG ID</th>
-                      <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>TEAM & LEADER</th>
-                      <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>COLLEGE</th>
-                      <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>PROBLEM STATEMENT</th>
-                      <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)' }}>STATUS</th>
-                      <th style={{ padding: '0.75rem 1rem', border: '1px solid var(--line)', textAlign: 'right' }}>DETAILS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredTeams.length === 0 ? (
-                      <tr>
-                        <td colSpan={7} style={{ padding: '3rem', textAlign: 'center', color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
-                          No teams found matching current search or filter criteria.
+                        {/* Team Lead */}
+                        <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)', color: 'var(--white)' }}>
+                          <div style={{ fontWeight: 600 }}>{team.teamLeader}</div>
+                          <div style={{ fontSize: '0.7rem', color: 'var(--muted)' }}>
+                            {team.members.length} Squad Members
+                          </div>
+                        </td>
+
+                        {/* Category (Atrians / Non-Atrians) */}
+                        <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)' }}>
+                          <span
+                            className="font-mono"
+                            style={{
+                              fontSize: '0.7rem',
+                              fontWeight: 700,
+                              padding: '0.2rem 0.5rem',
+                              background: team.category === 'ATRIANS' ? 'rgba(22, 213, 208, 0.1)' : 'rgba(255, 255, 255, 0.06)',
+                              color: team.category === 'ATRIANS' ? 'var(--cyan)' : 'var(--white)',
+                              border: team.category === 'ATRIANS' ? '1px solid var(--cyan)' : '1px solid var(--line)',
+                            }}
+                          >
+                            {team.category}
+                          </span>
+                        </td>
+
+                        {/* Status (SELECTED / ELIMINATED) */}
+                        <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)' }}>
+                          <span
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem',
+                              padding: '0.3rem 0.65rem',
+                              background: isSelected ? 'var(--acid)' : 'var(--ink)',
+                              color: isSelected ? 'var(--ink)' : 'var(--muted)',
+                              border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '0.72rem',
+                              fontWeight: 800,
+                              letterSpacing: '0.04em',
+                            }}
+                          >
+                            {isSelected ? <CheckCircle2 size={12} /> : <XCircle size={12} />}
+                            {isSelected ? 'SELECTED' : 'ELIMINATED'}
+                          </span>
+                        </td>
+
+                        {/* Action: VIEW MORE */}
+                        <td style={{ padding: '0.85rem 1rem', textAlign: 'right', border: '1px solid var(--line)' }}>
+                          <button
+                            onClick={() => setSelectedTeamModal(team)}
+                            style={{
+                              background: 'var(--paper)',
+                              border: '1px solid var(--line)',
+                              color: 'var(--white)',
+                              padding: '0.4rem 0.75rem',
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '0.72rem',
+                              fontWeight: 700,
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem',
+                              transition: 'all 0.1s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.borderColor = 'var(--acid)';
+                              e.currentTarget.style.color = 'var(--acid)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.borderColor = 'var(--line)';
+                              e.currentTarget.style.color = 'var(--white)';
+                            }}
+                          >
+                            <Eye size={12} />
+                            <span>VIEW MORE</span>
+                          </button>
                         </td>
                       </tr>
-                    ) : (
-                      filteredTeams.map((team) => {
-                        const isSelected = team.status === 'SELECTED';
-                        return (
-                          <tr
-                            key={team.id}
-                            style={{
-                              borderBottom: '1px solid var(--line)',
-                              background: isSelected ? 'rgba(234, 255, 0, 0.02)' : 'transparent',
-                              transition: 'background-color 0.1s ease',
-                            }}
-                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(245, 244, 237, 0.04)')}
-                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = isSelected ? 'rgba(234, 255, 0, 0.02)' : 'transparent')}
-                          >
-                            {/* Rank */}
-                            <td style={{ padding: '0.85rem 0.75rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: team.rank && team.rank <= 3 ? 'var(--acid)' : 'var(--white)', border: '1px solid var(--line)', textAlign: 'center' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem' }}>
-                                {team.rank && team.rank <= 3 && <Award size={14} color="var(--acid)" />}
-                                <span>#{team.rank}</span>
-                              </div>
-                            </td>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+        </NeoCard>
 
-                            {/* Reg ID */}
-                            <td style={{ padding: '0.85rem 1rem', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--cyan)', border: '1px solid var(--line)' }}>
-                              {team.id}
-                            </td>
-
-                            {/* Team & Leader */}
-                            <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)' }}>
-                              <div style={{ fontWeight: 800, color: 'var(--white)', fontSize: '0.92rem' }}>{team.teamName}</div>
-                              <div style={{ fontSize: '0.72rem', color: 'var(--muted)' }}>
-                                Lead: {team.teamLeader} ({team.teamSize} Members)
-                              </div>
-                            </td>
-
-                            {/* College */}
-                            <td style={{ padding: '0.85rem 1rem', fontSize: '0.75rem', color: 'var(--white)', border: '1px solid var(--line)' }}>
-                              <div>{team.collegeName}</div>
-                              <span className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--muted)' }}>
-                                [{team.passType}]
-                              </span>
-                            </td>
-
-                            {/* PS */}
-                            <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                <span
-                                  className="font-mono"
-                                  style={{
-                                    padding: '0.2rem 0.45rem',
-                                    background: 'var(--ink)',
-                                    color: 'var(--acid)',
-                                    border: '1px solid var(--line)',
-                                    fontWeight: 800,
-                                    fontSize: '0.72rem',
-                                  }}
-                                >
-                                  {team.problemStatementCode}
-                                </span>
-                                <span style={{ fontSize: '0.75rem', color: 'var(--muted)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                  {team.problemStatementTitle}
-                                </span>
-                              </div>
-                            </td>
-
-                            {/* Status */}
-                            <td style={{ padding: '0.85rem 1rem', border: '1px solid var(--line)' }}>
-                              <span
-                                style={{
-                                  display: 'inline-flex',
-                                  alignItems: 'center',
-                                  gap: '0.35rem',
-                                  padding: '0.3rem 0.65rem',
-                                  background: isSelected ? 'var(--acid)' : 'var(--ink)',
-                                  color: isSelected ? 'var(--ink)' : 'var(--muted)',
-                                  border: isSelected ? '2px solid var(--ink)' : '1px solid var(--line)',
-                                  fontFamily: 'var(--font-mono)',
-                                  fontSize: '0.7rem',
-                                  fontWeight: 800,
-                                }}
-                              >
-                                {isSelected ? <CheckCircle2 size={12} /> : <XCircle size={12} />}
-                                {isSelected ? 'SELECTED' : 'NOT SELECTED'}
-                              </span>
-                            </td>
-
-                            {/* Action */}
-                            <td style={{ padding: '0.85rem 1rem', textAlign: 'right', border: '1px solid var(--line)' }}>
-                              <button
-                                onClick={() => setSelectedTeamModal(team)}
-                                style={{
-                                  background: 'var(--ink)',
-                                  border: '1px solid var(--line)',
-                                  color: 'var(--cyan)',
-                                  padding: '0.35rem 0.65rem',
-                                  fontFamily: 'var(--font-mono)',
-                                  fontSize: '0.7rem',
-                                  fontWeight: 700,
-                                  cursor: 'pointer',
-                                }}
-                              >
-                                DETAILS
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </NeoCard>
-          </>
-        )}
-
-        {/* Simplified Team Details Modal */}
+        {/* View More Team Details Modal */}
         {selectedTeamModal && (
           <Modal
             isOpen={!!selectedTeamModal}
             onClose={() => setSelectedTeamModal(null)}
-            title={`${selectedTeamModal.teamName} // DETAILS`}
-            subtitle={`REGISTRATION: ${selectedTeamModal.id} • ${selectedTeamModal.collegeName}`}
+            title={`${selectedTeamModal.teamName} // SQUAD PROFILE`}
+            subtitle={`SL NO: #${String(selectedTeamModal.slNo).padStart(2, '0')} • CATEGORY: ${selectedTeamModal.category}`}
           >
             <div>
               {/* Status Header Box */}
               <div
                 style={{
-                  background: selectedTeamModal.status === 'SELECTED' ? 'rgba(234, 255, 0, 0.1)' : 'rgba(255, 255, 255, 0.05)',
+                  background: selectedTeamModal.status === 'SELECTED' ? 'rgba(234, 255, 0, 0.08)' : 'rgba(255, 255, 255, 0.04)',
                   border: selectedTeamModal.status === 'SELECTED' ? '2px solid var(--acid)' : '2px solid var(--line)',
                   padding: '1.25rem',
                   marginBottom: '1.5rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '1rem',
                 }}
               >
                 <div>
                   <div className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--muted)' }}>
                     TEAM NAME
                   </div>
-                  <div className="font-display" style={{ fontSize: '1.8rem', color: 'var(--white)', lineHeight: 1.2 }}>
+                  <div className="font-display" style={{ fontSize: '2rem', color: 'var(--white)', lineHeight: 1.2 }}>
                     {selectedTeamModal.teamName}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.3rem' }}>
-                    Leader: <strong style={{ color: 'var(--white)' }}>{selectedTeamModal.teamLeader}</strong>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--muted)', marginTop: '0.35rem' }}>
+                    Team Leader: <strong style={{ color: 'var(--acid)' }}>{selectedTeamModal.teamLeader}</strong>
                   </div>
                 </div>
 
                 <div style={{ textAlign: 'right' }}>
                   <StatusBadge
-                    status={selectedTeamModal.status === 'SELECTED' ? 'SELECTED' : 'NOT SELECTED'}
+                    status={selectedTeamModal.status === 'SELECTED' ? 'SELECTED' : 'ELIMINATED'}
                     variant={selectedTeamModal.status === 'SELECTED' ? 'acid' : 'outline'}
                   />
-                  <div className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '0.4rem' }}>
-                    Rank: #{selectedTeamModal.rank}
+                  <div className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--white)', marginTop: '0.5rem', fontWeight: 800 }}>
+                    SL NO #{String(selectedTeamModal.slNo).padStart(2, '0')}
                   </div>
                 </div>
               </div>
 
               {/* Problem Statement Box */}
-              <div style={{ background: 'var(--ink)', border: '1px solid var(--line)', padding: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ background: 'var(--ink)', border: '1px solid var(--line)', padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
                 <TechnicalLabel color="cyan" variant="bracket">
-                  // SELECTED PROBLEM STATEMENT
+                  // ASSIGNED PROBLEM STATEMENT
                 </TechnicalLabel>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginTop: '0.6rem' }}>
                   <span
                     className="font-mono"
                     style={{
-                      padding: '0.25rem 0.55rem',
+                      padding: '0.25rem 0.6rem',
                       background: 'var(--acid)',
                       color: 'var(--ink)',
                       fontWeight: 800,
@@ -514,49 +497,53 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({ onSelectTab }) => {
                   >
                     {selectedTeamModal.problemStatementCode}
                   </span>
-                  <span style={{ fontWeight: 800, color: 'var(--white)', fontSize: '0.95rem' }}>
+                  <span style={{ fontWeight: 800, color: 'var(--white)', fontSize: '1rem' }}>
                     {selectedTeamModal.problemStatementTitle}
                   </span>
                 </div>
               </div>
 
-              {/* Team Members List */}
+              {/* Members of the Team */}
               <div style={{ marginBottom: '1.75rem' }}>
                 <TechnicalLabel color="acid" variant="bracket">
-                  // SQUAD MEMBERS ({selectedTeamModal.teamSize} MEMBERS)
+                  // MEMBERS OF THE TEAM ({selectedTeamModal.members.length} MEMBERS)
                 </TechnicalLabel>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.65rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: '0.75rem' }}>
                   {selectedTeamModal.members.map((member, idx) => (
                     <span
                       key={idx}
                       style={{
-                        padding: '0.4rem 0.75rem',
+                        padding: '0.5rem 0.85rem',
                         background: 'var(--paper)',
                         border: '1px solid var(--line)',
                         color: 'var(--white)',
-                        fontSize: '0.8rem',
+                        fontSize: '0.82rem',
                         fontFamily: 'var(--font-mono)',
+                        fontWeight: 600,
                       }}
                     >
-                      {idx === 0 ? `★ ${member} (Team Leader)` : member}
+                      {member.toLowerCase() === selectedTeamModal.teamLeader.toLowerCase()
+                        ? `★ ${member} (Team Lead)`
+                        : `✦ ${member}`}
                     </span>
                   ))}
                 </div>
               </div>
 
               {/* College Information */}
-              <div style={{ background: 'var(--ink)', border: '1px solid var(--line)', padding: '0.85rem 1rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ background: 'var(--ink)', border: '1px solid var(--line)', padding: '0.85rem 1.25rem', marginBottom: '1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>
-                  COLLEGE / INSTITUTE:
+                  COLLEGE / INSTITUTION:
                 </span>
                 <span className="font-mono" style={{ fontSize: '0.82rem', color: 'var(--white)', fontWeight: 700 }}>
-                  {selectedTeamModal.collegeName} ({selectedTeamModal.passType})
+                  {selectedTeamModal.collegeName} [{selectedTeamModal.category}]
                 </span>
               </div>
 
+              {/* Close Button */}
               <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid var(--line)', paddingTop: '1.25rem' }}>
-                <Button variant="outline" size="md" onClick={() => setSelectedTeamModal(null)}>
-                  CLOSE DETAILS
+                <Button variant="primary" size="md" onClick={() => setSelectedTeamModal(null)}>
+                  CLOSE PROFILE
                 </Button>
               </div>
             </div>
@@ -566,3 +553,5 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({ onSelectTab }) => {
     </div>
   );
 };
+
+export default ResultsPage;

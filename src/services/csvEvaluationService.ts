@@ -1,197 +1,310 @@
 // CSV Evaluation Service for CYPHER 4.0
-// Parses Google Sheets CSV files containing judge scores and ranks teams.
-// Rule: Teams with score > 70 are SELECTED (Qualified), <= 70 are ELIMINATED.
+// Parses Round 1 evaluation CSV files for Atrians and Non-Atrians.
+// Confidentiality Rule: Marks and criteria breakdown are strictly confidential and NEVER exposed to users.
+// Selection Rule: Teams with score >= 50 are SELECTED, < 50 are ELIMINATED.
+// Qualification Rule: Only teams where ALL evaluation criteria are marked and total marks is calculated are considered.
 
-export interface TeamEvaluationRecord {
-  id: string; // e.g. REG-2026-B827AC
+export interface TeamLeaderboardRecord {
+  id: string;
+  slNo: number;
   teamName: string;
   teamLeader: string;
-  contactNumber: string;
   email: string;
   collegeName: string;
-  passType: 'ATRIANS' | 'NON-ATRIANS';
-  competitionTrack: 'HACKATHON' | 'IDEATHON';
+  category: 'ATRIANS' | 'NON-ATRIANS';
   problemStatementCode: string;
   problemStatementTitle: string;
   teamSize: number;
   members: string[];
-  // Judges marks (out of 100)
-  score: number;
-  breakdown: {
-    innovation: number;       // out of 30
-    technicalComplexity: number; // out of 30
-    execution: number;        // out of 25
-    presentation: number;     // out of 15
-  };
   status: 'SELECTED' | 'ELIMINATED';
-  judgeRemarks: string;
-  evaluatedAt: string;
-  rank?: number;
+  // Note: score is stored internally for sorting only and NEVER rendered in the UI
+  _internalScore: number;
 }
 
-// Pre-seeded real teams from the official registration CSVs with judge scoring matrix
-const INITIAL_EVALUATIONS: TeamEvaluationRecord[] = [];
+const PROBLEM_MAP: Record<string, { code: string; title: string }> = {
+  '1': { code: 'PS-01', title: 'The Spare Parts Desk (Kaveri Spares & Hydraulics)' },
+  '2': { code: 'PS-02', title: 'The Festival Rush (VoltKart Electronics)' },
+  '3': { code: 'PS-03', title: 'The Wrong Sizes (BigFit Apparel)' },
+  '4': { code: 'PS-04', title: 'Head Office, 8:30 a.m. (FreshBasket Franchise Network)' },
+  '5': { code: 'PS-05', title: 'The Blocked Bed (Sanjeevani Multispeciality Hospital)' },
+  '6': { code: 'PS-06', title: 'Before the Match Starts (Zipcart)' },
+  '7': { code: 'PS-07', title: 'Batch B2231 (Arogya Pharma Distributors)' },
+  '8': { code: 'PS-08', title: 'The Truck Near Hubli (Sudha Home Products)' },
+  '9': { code: 'PS-09', title: 'One Missing Part (Precision Axle Components)' },
+  '10': { code: 'PS-10', title: 'What Came Back (Gadgetbay)' },
+  '11': { code: 'PS-11', title: 'Three Small Warnings (Malnad Industrial Pumps)' },
+  '12': { code: 'PS-12', title: 'AI Voice Commerce Agent' },
+  '13': { code: 'PS-13', title: 'Predictive Stock Depletion' },
+  '14': { code: 'PS-14', title: 'Real-Time Driver Payout Engine' },
+};
 
-const STORAGE_KEY = 'cypher4_official_evaluations';
+export const SELECTION_CUTOFF_SCORE = 50;
+const STORAGE_KEY = 'cypher4_leaderboard_round1_records';
 
 export class CSVEvaluationService {
   /**
-   * Load evaluations from localStorage or initialize empty
+   * Helper to map problem statement number or string to formatted code and title
    */
-  public static getEvaluations(): TeamEvaluationRecord[] {
-    try {
-      // Clear legacy mock data if present
-      localStorage.removeItem('cypher4_evaluations_v1');
-      localStorage.removeItem('cypher4_mock_teams');
-      
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          return this.rankRecords(parsed);
+  public static resolveProblemStatement(psRaw: string): { code: string; title: string } {
+    const trimmed = (psRaw || '').trim();
+    if (PROBLEM_MAP[trimmed]) {
+      return PROBLEM_MAP[trimmed];
+    }
+
+    // Check if matches PS-01, PS-1, etc.
+    const numMatch = trimmed.match(/\b(?:ps[-_ ]*)?(\d{1,2})\b/i);
+    if (numMatch && PROBLEM_MAP[numMatch[1]]) {
+      return PROBLEM_MAP[numMatch[1]];
+    }
+
+    return {
+      code: trimmed ? `PS-${trimmed.padStart(2, '0')}` : 'PS-UNASSIGNED',
+      title: 'Challenge Track',
+    };
+  }
+
+  /**
+   * Parse a single CSV string for Atrians or Non-Atrians.
+   * Only includes teams where each and every criterion is marked and total marks is calculated.
+   */
+  public static parseTeamCSV(csvText: string, defaultCategory: 'ATRIANS' | 'NON-ATRIANS'): TeamLeaderboardRecord[] {
+    const lines = csvText.trim().split('\n').filter(line => line.trim().length > 0);
+    if (lines.length < 2) return [];
+
+    // Parse header
+    const headers = this.parseCSVLine(lines[0]).map(h => h.trim().toLowerCase());
+
+    const records: TeamLeaderboardRecord[] = [];
+
+    // Identify criteria column indices
+    // Columns: Supply-chain reasoning, Agentic behaviour, Decision quality, Working prototype, Innovation, UX & presentation
+    const criteriaIndices: number[] = [];
+    headers.forEach((h, idx) => {
+      if (
+        h.includes('supply') ||
+        h.includes('agentic') ||
+        h.includes('decision') ||
+        h.includes('prototype') ||
+        h.includes('innovation') ||
+        h.includes('ux') ||
+        h.includes('presentation')
+      ) {
+        criteriaIndices.push(idx);
+      }
+    });
+
+    const totalMarksIdx = headers.findIndex(h => h.includes('total marks') || h.includes('total score'));
+
+    for (let i = 1; i < lines.length; i++) {
+      const row = this.parseCSVLine(lines[i]);
+      if (row.length === 0) continue;
+
+      const getCol = (...colNames: string[]) => {
+        for (const name of colNames) {
+          const idx = headers.findIndex(h => h.includes(name.toLowerCase()));
+          if (idx !== -1 && row[idx] !== undefined) {
+            return row[idx].trim();
+          }
+        }
+        return '';
+      };
+
+      const teamName = getCol('team name', 'team');
+      if (!teamName) continue;
+
+      // Rule check: All criteria must be marked and total marks must be calculated
+      let allCriteriaMarked = criteriaIndices.length > 0;
+      for (const idx of criteriaIndices) {
+        const val = (row[idx] || '').trim();
+        if (val === '' || isNaN(Number(val))) {
+          allCriteriaMarked = false;
+          break;
         }
       }
-    } catch {
-      // Fallback
+
+      const totalMarksVal = totalMarksIdx !== -1 && row[totalMarksIdx] !== undefined 
+        ? row[totalMarksIdx].trim() 
+        : getCol('total marks', 'total');
+      
+      const parsedTotal = parseFloat(totalMarksVal);
+
+      // Skip teams that were NOT evaluated (missing criteria or 0/empty total marks)
+      if (!allCriteriaMarked || isNaN(parsedTotal) || parsedTotal <= 0) {
+        continue;
+      }
+
+      const passVal = getCol('pass', 'category').toUpperCase();
+      const category: 'ATRIANS' | 'NON-ATRIANS' = passVal.includes('NON') 
+        ? 'NON-ATRIANS' 
+        : passVal.includes('ATRIAN') 
+        ? 'ATRIANS' 
+        : defaultCategory;
+
+      const leader = getCol('team leader name', 'team leader', 'leader', 'name') || 'Team Lead';
+      const email = getCol('email', 'mail');
+      const college = getCol('college name', 'college', 'institute') || (category === 'ATRIANS' ? 'Atria Institute of Technology' : 'Engineering Institution');
+      const teamSize = parseInt(getCol('team size', 'size')) || 4;
+
+      const psRaw = getCol('problem statement', 'problem', 'ps');
+      const psInfo = this.resolveProblemStatement(psRaw);
+
+      // Members list
+      const member1 = getCol('member 1');
+      const member2 = getCol('member 2');
+      const member3 = getCol('member 3');
+      const member4 = getCol('member 4');
+      const members = [member1, member2, member3, member4].filter(m => m && m.trim().length > 0);
+      if (members.length === 0 && leader) {
+        members.push(leader);
+      }
+
+      const status: 'SELECTED' | 'ELIMINATED' = parsedTotal >= SELECTION_CUTOFF_SCORE ? 'SELECTED' : 'ELIMINATED';
+
+      records.push({
+        id: `${category === 'ATRIANS' ? 'ATR' : 'NATR'}-${i}`,
+        slNo: 0, // will be assigned after full sorting
+        teamName,
+        teamLeader: leader,
+        email,
+        collegeName: college,
+        category,
+        problemStatementCode: psInfo.code,
+        problemStatementTitle: psInfo.title,
+        teamSize,
+        members,
+        status,
+        _internalScore: parsedTotal,
+      });
     }
 
-    return [];
+    return records;
   }
 
   /**
-   * Persist evaluations to localStorage
+   * Split a CSV line respecting quoted strings with commas
    */
-  public static saveEvaluations(records: TeamEvaluationRecord[]) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-    } catch (e) {
-      console.error('Failed to persist evaluations to localStorage', e);
+  private static parseCSVLine(line: string): string[] {
+    const row: string[] = [];
+    let inQuotes = false;
+    let token = '';
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        row.push(token.trim().replace(/^"|"$/g, ''));
+        token = '';
+      } else {
+        token += char;
+      }
     }
+    row.push(token.trim().replace(/^"|"$/g, ''));
+    return row;
   }
 
   /**
-   * Compute ranks and status (> 70 is SELECTED, <= 70 is ELIMINATED)
+   * Sorts records descending from highest score to lowest score and assigns SL NO (1, 2, 3...)
    */
-  public static rankRecords(records: TeamEvaluationRecord[]): TeamEvaluationRecord[] {
-    const sorted = [...records].sort((a, b) => b.score - a.score);
+  public static sortAndAssignSlNo(records: TeamLeaderboardRecord[]): TeamLeaderboardRecord[] {
+    const sorted = [...records].sort((a, b) => b._internalScore - a._internalScore);
     return sorted.map((r, idx) => ({
       ...r,
-      rank: idx + 1,
-      status: r.score > 70 ? 'SELECTED' : 'ELIMINATED',
+      slNo: idx + 1,
     }));
   }
 
   /**
-   * Parse a Google Sheets CSV string and update evaluations
-   * Expected columns: Team Name / ID, Leader, Track, PS Code, Score / Marks (out of 100), Remarks, College, etc.
+   * Fetch both Atrians and Non-Atrians CSV files from public folder
    */
-  public static parseAndImportCSV(csvText: string): { success: boolean; count: number; error?: string } {
+  public static async fetchOfficialDatasets(): Promise<TeamLeaderboardRecord[]> {
     try {
-      const lines = csvText.trim().split('\n').filter(line => line.trim().length > 0);
-      if (lines.length < 2) {
-        return { success: false, count: 0, error: 'CSV file is empty or missing data rows.' };
+      const atriansUrl = '/team%20data/atrians/atrians.csv';
+      const nonAtriansUrl = '/team%20data/non-atrians/non-atrians.csv';
+      const nonAtriansFallbackUrl = '/team%20data/non-atrians/%20non%20atrians.csv';
+
+      let atrianRecords: TeamLeaderboardRecord[] = [];
+      let nonAtrianRecords: TeamLeaderboardRecord[] = [];
+
+      // Fetch Atrians CSV
+      try {
+        const res = await fetch(atriansUrl);
+        if (res.ok) {
+          const text = await res.text();
+          atrianRecords = this.parseTeamCSV(text, 'ATRIANS');
+        }
+      } catch (err) {
+        console.warn('Failed fetching Atrians CSV', err);
       }
 
-      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
-      
-      const newRecords: TeamEvaluationRecord[] = [];
-
-      for (let i = 1; i < lines.length; i++) {
-        // Basic CSV line splitting supporting quoted values
-        const row: string[] = [];
-        let inQuotes = false;
-        let token = '';
-
-        for (const char of lines[i]) {
-          if (char === '"') {
-            inQuotes = !inQuotes;
-          } else if (char === ',' && !inQuotes) {
-            row.push(token.trim());
-            token = '';
-          } else {
-            token += char;
-          }
+      // Fetch Non-Atrians CSV
+      try {
+        let res = await fetch(nonAtriansUrl);
+        if (!res.ok) {
+          res = await fetch(nonAtriansFallbackUrl);
         }
-        row.push(token.trim());
-
-        // Extract fields
-        const getCol = (...colNames: string[]) => {
-          for (const name of colNames) {
-            const idx = headers.findIndex(h => h.includes(name.toLowerCase()));
-            if (idx !== -1 && row[idx] !== undefined) {
-              return row[idx].replace(/^"|"$/g, '').trim();
-            }
-          }
-          return '';
-        };
-
-        const id = getCol('registration id', 'reg id', 'id') || `REG-${2026}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-        const teamName = getCol('team name', 'team') || `Team ${i}`;
-        const leader = getCol('team leader name', 'team leader', 'leader', 'name') || 'Team Lead';
-        const contact = getCol('contact number', 'contact', 'phone') || '910000000000';
-        const email = getCol('email', 'mail') || `team${i}@cypher.org`;
-        const college = getCol('college name', 'college', 'institute') || 'Atria Institute of Technology';
-        const pass = (getCol('pass', 'category').toUpperCase().includes('ATRIAN') ? 'ATRIANS' : 'NON-ATRIANS') as 'ATRIANS' | 'NON-ATRIANS';
-        const track = (getCol('track', 'competition').toUpperCase().includes('IDEA') ? 'IDEATHON' : 'HACKATHON') as 'HACKATHON' | 'IDEATHON';
-        const psCode = getCol('problem statement code', 'ps code', 'ps', 'problem') || (track === 'HACKATHON' ? `PS-0${(i % 6) + 1}` : `IDEA-0${(i % 3) + 1}`);
-        const psTitle = getCol('problem statement title', 'title') || 'Dynamic Engineering Challenge';
-        const teamSize = parseInt(getCol('team size', 'size')) || 4;
-
-        // Parse Marks / Score (out of 100)
-        let rawScore = parseFloat(getCol('score', 'marks', 'points', 'total marks', 'total score'));
-        if (isNaN(rawScore)) {
-          // Check if individual criteria exist
-          const inn = parseFloat(getCol('innovation')) || 22;
-          const tech = parseFloat(getCol('technical', 'complexity')) || 22;
-          const exec = parseFloat(getCol('execution', 'demo')) || 18;
-          const pres = parseFloat(getCol('presentation')) || 12;
-          rawScore = inn + tech + exec + pres;
+        if (res.ok) {
+          const text = await res.text();
+          nonAtrianRecords = this.parseTeamCSV(text, 'NON-ATRIANS');
         }
-
-        const score = Math.min(100, Math.max(0, Math.round(rawScore * 10) / 10));
-        const status = score > 70 ? 'SELECTED' : 'ELIMINATED';
-        const remarks = getCol('judge remarks', 'remarks', 'feedback') || (score > 70 ? 'Meets qualification criteria.' : 'Below evaluation threshold.');
-
-        newRecords.push({
-          id,
-          teamName,
-          teamLeader: leader,
-          contactNumber: contact,
-          email,
-          collegeName: college,
-          passType: pass,
-          competitionTrack: track,
-          problemStatementCode: psCode,
-          problemStatementTitle: psTitle,
-          teamSize,
-          members: [leader],
-          score,
-          breakdown: {
-            innovation: Math.round(score * 0.3 * 10) / 10,
-            technicalComplexity: Math.round(score * 0.3 * 10) / 10,
-            execution: Math.round(score * 0.25 * 10) / 10,
-            presentation: Math.round(score * 0.15 * 10) / 10,
-          },
-          status,
-          judgeRemarks: remarks,
-          evaluatedAt: `Round 1 — ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-        });
+      } catch (err) {
+        console.warn('Failed fetching Non-Atrians CSV', err);
       }
 
-      const ranked = this.rankRecords(newRecords);
-      this.saveEvaluations(ranked);
-      return { success: true, count: ranked.length };
-    } catch (err: any) {
-      return { success: false, count: 0, error: err.message || 'Error parsing CSV.' };
+      const combined = [...atrianRecords, ...nonAtrianRecords];
+      if (combined.length > 0) {
+        const sorted = this.sortAndAssignSlNo(combined);
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(sorted));
+        } catch {}
+        return sorted;
+      }
+    } catch (e) {
+      console.error('Error fetching official datasets', e);
+    }
+
+    // If fetch failed, return any cached records or seed data
+    return this.getCachedRecords();
+  }
+
+  /**
+   * Retrieve cached records from localStorage
+   */
+  public static getCachedRecords(): TeamLeaderboardRecord[] {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return this.sortAndAssignSlNo(parsed);
+        }
+      }
+    } catch {}
+    return [];
+  }
+
+  /**
+   * Save uploaded or updated records
+   */
+  public static saveRecords(records: TeamLeaderboardRecord[]) {
+    try {
+      const sorted = this.sortAndAssignSlNo(records);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sorted));
+      return sorted;
+    } catch (e) {
+      console.error('Failed saving leaderboard records', e);
+      return records;
     }
   }
 
   /**
-   * Reset evaluations back to original seed data
+   * Import custom CSV content for testing or live updates
    */
-  public static resetToSeedData(): TeamEvaluationRecord[] {
-    const ranked = this.rankRecords(INITIAL_EVALUATIONS);
-    this.saveEvaluations(ranked);
-    return ranked;
+  public static importCustomCSV(csvText: string, category: 'ATRIANS' | 'NON-ATRIANS'): TeamLeaderboardRecord[] {
+    const current = this.getCachedRecords();
+    const otherCategory = current.filter(r => r.category !== category);
+    const newForCategory = this.parseTeamCSV(csvText, category);
+    const combined = [...otherCategory, ...newForCategory];
+    return this.saveRecords(combined);
   }
 }

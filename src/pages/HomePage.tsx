@@ -394,7 +394,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     {[
                       { id: 'WORKSTATIONS', label: '14 TRACKS', status: 'EVALUATION LIVE' },
                       { id: 'JUDGING PANEL', label: 'EXPERTS & MENTORS', status: 'ON FLOOR' },
-                      { id: 'LEADERBOARD', label: 'ROUND 01 STANDINGS', status: 'PENDING SCORES' },
+                      { id: 'LEADERBOARD', label: 'ROUND 01 STANDINGS', status: 'ROUND 01 LIVE' },
                     ].map((item) => (
                       <div
                         key={item.id}
