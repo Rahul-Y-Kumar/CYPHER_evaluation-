@@ -10,7 +10,8 @@ import {
   Maximize2,
   ExternalLink,
   Building2,
-  Download
+  Download,
+  Trophy
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { NeoCard } from '../components/ui/NeoCard';
@@ -190,12 +191,54 @@ export const HomePage: React.FC<HomePageProps> = ({
                   opacity: 0.92,
                   maxWidth: '540px',
                   lineHeight: '1.65',
-                  marginBottom: '2.25rem',
+                  marginBottom: '1.5rem',
                   fontWeight: 500,
                 }}
               >
                 A high-energy hackathon platform built for builders, innovators and problem solvers.
               </p>
+
+              {/* Official Winners & Round 2 Announcement Callout */}
+              <div
+                style={{
+                  background: 'rgba(234, 255, 0, 0.08)',
+                  border: '1px solid var(--acid)',
+                  padding: '0.85rem 1.15rem',
+                  marginBottom: '2rem',
+                  maxWidth: '540px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '0.75rem',
+                  cursor: 'pointer',
+                  boxShadow: '3px 3px 0 var(--ink)',
+                  transition: 'all 0.15s ease',
+                }}
+                onClick={() => onSelectTab('results')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                  e.currentTarget.style.boxShadow = '5px 5px 0 var(--acid)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translate(0, 0)';
+                  e.currentTarget.style.boxShadow = '3px 3px 0 var(--ink)';
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <Trophy size={20} color="var(--acid)" />
+                  <div>
+                    <div className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--acid)', fontWeight: 800 }}>
+                      KD'S GARAGE WINNERS ANNOUNCED
+                    </div>
+                    <div style={{ fontSize: '0.82rem', color: 'var(--white)', fontWeight: 600 }}>
+                      Round 2 Qualifiers & Problem Statement Winners are live
+                    </div>
+                  </div>
+                </div>
+                <span className="font-mono" style={{ color: 'var(--acid)', fontSize: '0.78rem', fontWeight: 800, whiteSpace: 'nowrap' }}>
+                  VIEW LEADERBOARD ↗
+                </span>
+              </div>
 
               {/* CTA Buttons with Text Roll & Arrow Rotation Interactions */}
               <div

@@ -45,18 +45,17 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Reusable LiveTicker Component at the very top */}
       <LiveTicker
         items={[
-          '✦ CYPHER 4.0',
+          '🏆 KD\'S GARAGE WINNERS ANNOUNCED',
+          '⚡ ROUND 2 QUALIFIERS RELEASED',
+          '✦ CYPHER 4.0 LIVE STANDINGS',
           '✦ BUILD',
           '✦ INNOVATE',
-          '✦ COMPETE',
           '✦ SHIP',
-          '✦ CREATE',
-          '✦ CYPHER 4.0',
+          '🏆 OFFICIAL RESULTS LIVE',
           '✦ 14 SPECIALIZED TRACKS',
-          '✦ IN-PERSON EVALUATION PROTOCOL',
           '✦ ROTARACT CLUB OF ATRIA IT',
         ]}
-        speedSeconds={26}
+        speedSeconds={24}
       />
 
       {/* Main Sticky Navigation Bar */}

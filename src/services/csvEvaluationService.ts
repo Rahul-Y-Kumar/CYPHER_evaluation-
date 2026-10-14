@@ -1,8 +1,9 @@
 // CSV Evaluation Service for CYPHER 4.0
-// Parses Round 1 evaluation CSV files for Atrians and Non-Atrians.
+// Parses Round 1 evaluation CSV files for Atrians, Non-Atrians, and Winners.
 // Confidentiality Rule: Marks and criteria breakdown are strictly confidential and NEVER exposed to users.
-// Selection Rule: Teams with score >= 50 are SELECTED, < 50 are ELIMINATED.
-// Qualification Rule: Only teams where ALL evaluation criteria are marked and total marks is calculated are considered.
+// Selection Rule: Teams with total marks >= 80 are eligible for Round 2 evaluation (SELECTED), < 80 are ELIMINATED (Round 1 Concluded).
+
+import { SEED_LEADERBOARD_RECORDS, KD_GARAGE_WINNERS } from '../data/seedLeaderboardData';
 
 export interface TeamLeaderboardRecord {
   id: string;
@@ -17,7 +18,12 @@ export interface TeamLeaderboardRecord {
   teamSize: number;
   members: string[];
   status: 'SELECTED' | 'ELIMINATED';
-  // Note: score is stored internally for sorting only and NEVER rendered in the UI
+  isEligibleForRound2: boolean;
+  isWinner: boolean;
+  winnerRank?: 1 | 2 | 3 | null;
+  winnerTitle?: string | null;
+  winnerAward?: string | null;
+  // Strictly internal score for ranking and cutoff computation; NEVER rendered in the UI
   _internalScore: number;
 }
 
@@ -38,8 +44,9 @@ const PROBLEM_MAP: Record<string, { code: string; title: string }> = {
   '14': { code: 'PS-14', title: 'Real-Time Driver Payout Engine' },
 };
 
-export const SELECTION_CUTOFF_SCORE = 50;
-const STORAGE_KEY = 'cypher4_leaderboard_round1_records';
+export const SELECTION_CUTOFF_SCORE = 80;
+const STORAGE_KEY = 'cypher4_leaderboard_round2_eval_v3';
+const LEGACY_STORAGE_KEYS = ['cypher4_leaderboard_round1_records', 'cypher4_official_evaluations'];
 
 export class CSVEvaluationService {
   /**
@@ -51,7 +58,6 @@ export class CSVEvaluationService {
       return PROBLEM_MAP[trimmed];
     }
 
-    // Check if matches PS-01, PS-1, etc.
     const numMatch = trimmed.match(/\b(?:ps[-_ ]*)?(\d{1,2})\b/i);
     if (numMatch && PROBLEM_MAP[numMatch[1]]) {
       return PROBLEM_MAP[numMatch[1]];
@@ -59,39 +65,82 @@ export class CSVEvaluationService {
 
     return {
       code: trimmed ? `PS-${trimmed.padStart(2, '0')}` : 'PS-UNASSIGNED',
-      title: 'Challenge Track',
+      title: "KD's Garage Challenge Track",
     };
   }
 
   /**
-   * Parse a single CSV string for Atrians or Non-Atrians.
-   * Only includes teams where each and every criterion is marked and total marks is calculated.
+   * Split a CSV line respecting quoted strings with commas
    */
-  public static parseTeamCSV(csvText: string, defaultCategory: 'ATRIANS' | 'NON-ATRIANS'): TeamLeaderboardRecord[] {
+  public static parseCSVLine(line: string): string[] {
+    const row: string[] = [];
+    let inQuotes = false;
+    let token = '';
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        row.push(token.trim().replace(/^"|"$/g, ''));
+        token = '';
+      } else {
+        token += char;
+      }
+    }
+    row.push(token.trim().replace(/^"|"$/g, ''));
+    return row;
+  }
+
+  /**
+   * Parse winners CSV
+   */
+  public static parseWinnersCSV(csvText: string): Map<string, { rank: 1 | 2 | 3; title: string; award: string }> {
+    const winnersMap = new Map<string, { rank: 1 | 2 | 3; title: string; award: string }>();
+    const lines = csvText.trim().split('\n').filter(line => line.trim().length > 0);
+
+    for (const line of lines) {
+      const row = this.parseCSVLine(line);
+      if (row.length < 2) continue;
+      // Skip header if line starts with 'Pass' or 'Category'
+      if (row[0].toLowerCase().includes('pass') || row[1].toLowerCase().includes('team')) continue;
+
+      const teamName = (row[1] || '').trim();
+      if (!teamName) continue;
+
+      let rankNum: 1 | 2 | 3 = 1;
+      const lastCol = (row[row.length - 1] || '').trim();
+      if (lastCol === '2') rankNum = 2;
+      else if (lastCol === '3') rankNum = 3;
+
+      const title =
+        rankNum === 1
+          ? "KD's Garage Champion (1st Place)"
+          : rankNum === 2
+          ? '1st Runner Up (2nd Place)'
+          : '2nd Runner Up (3rd Place)';
+      
+      const award = rankNum === 1 ? 'Champion' : rankNum === 2 ? '1st Runner Up' : '2nd Runner Up';
+
+      winnersMap.set(teamName.toLowerCase(), { rank: rankNum, title, award });
+    }
+
+    return winnersMap;
+  }
+
+  /**
+   * Parse a single CSV string for Atrians or Non-Atrians.
+   */
+  public static parseTeamCSV(
+    csvText: string,
+    defaultCategory: 'ATRIANS' | 'NON-ATRIANS',
+    winnersMap: Map<string, { rank: 1 | 2 | 3; title: string; award: string }> = new Map()
+  ): TeamLeaderboardRecord[] {
     const lines = csvText.trim().split('\n').filter(line => line.trim().length > 0);
     if (lines.length < 2) return [];
 
-    // Parse header
     const headers = this.parseCSVLine(lines[0]).map(h => h.trim().toLowerCase());
-
     const records: TeamLeaderboardRecord[] = [];
-
-    // Identify criteria column indices
-    // Columns: Supply-chain reasoning, Agentic behaviour, Decision quality, Working prototype, Innovation, UX & presentation
-    const criteriaIndices: number[] = [];
-    headers.forEach((h, idx) => {
-      if (
-        h.includes('supply') ||
-        h.includes('agentic') ||
-        h.includes('decision') ||
-        h.includes('prototype') ||
-        h.includes('innovation') ||
-        h.includes('ux') ||
-        h.includes('presentation')
-      ) {
-        criteriaIndices.push(idx);
-      }
-    });
 
     const totalMarksIdx = headers.findIndex(h => h.includes('total marks') || h.includes('total score'));
 
@@ -112,24 +161,14 @@ export class CSVEvaluationService {
       const teamName = getCol('team name', 'team');
       if (!teamName) continue;
 
-      // Rule check: All criteria must be marked and total marks must be calculated
-      let allCriteriaMarked = criteriaIndices.length > 0;
-      for (const idx of criteriaIndices) {
-        const val = (row[idx] || '').trim();
-        if (val === '' || isNaN(Number(val))) {
-          allCriteriaMarked = false;
-          break;
-        }
-      }
-
       const totalMarksVal = totalMarksIdx !== -1 && row[totalMarksIdx] !== undefined 
         ? row[totalMarksIdx].trim() 
         : getCol('total marks', 'total');
       
       const parsedTotal = parseFloat(totalMarksVal);
 
-      // Skip teams that were NOT evaluated (missing criteria or 0/empty total marks)
-      if (!allCriteriaMarked || isNaN(parsedTotal) || parsedTotal <= 0) {
+      // Only include evaluated teams with calculated total marks > 0
+      if (isNaN(parsedTotal) || parsedTotal <= 0) {
         continue;
       }
 
@@ -158,11 +197,16 @@ export class CSVEvaluationService {
         members.push(leader);
       }
 
-      const status: 'SELECTED' | 'ELIMINATED' = parsedTotal >= SELECTION_CUTOFF_SCORE ? 'SELECTED' : 'ELIMINATED';
+      // Check if team is in winners list
+      const winnerInfo = winnersMap.get(teamName.toLowerCase());
+      const isWinner = !!winnerInfo;
+
+      const isEligibleForRound2 = parsedTotal >= SELECTION_CUTOFF_SCORE;
+      const status: 'SELECTED' | 'ELIMINATED' = isEligibleForRound2 ? 'SELECTED' : 'ELIMINATED';
 
       records.push({
         id: `${category === 'ATRIANS' ? 'ATR' : 'NATR'}-${i}`,
-        slNo: 0, // will be assigned after full sorting
+        slNo: 0,
         teamName,
         teamLeader: leader,
         email,
@@ -173,34 +217,16 @@ export class CSVEvaluationService {
         teamSize,
         members,
         status,
+        isEligibleForRound2,
+        isWinner,
+        winnerRank: winnerInfo?.rank,
+        winnerTitle: winnerInfo?.title,
+        winnerAward: winnerInfo?.award,
         _internalScore: parsedTotal,
       });
     }
 
     return records;
-  }
-
-  /**
-   * Split a CSV line respecting quoted strings with commas
-   */
-  private static parseCSVLine(line: string): string[] {
-    const row: string[] = [];
-    let inQuotes = false;
-    let token = '';
-
-    for (let i = 0; i < line.length; i++) {
-      const char = line[i];
-      if (char === '"') {
-        inQuotes = !inQuotes;
-      } else if (char === ',' && !inQuotes) {
-        row.push(token.trim().replace(/^"|"$/g, ''));
-        token = '';
-      } else {
-        token += char;
-      }
-    }
-    row.push(token.trim().replace(/^"|"$/g, ''));
-    return row;
   }
 
   /**
@@ -215,40 +241,79 @@ export class CSVEvaluationService {
   }
 
   /**
-   * Fetch both Atrians and Non-Atrians CSV files from public folder
+   * Fetch Atrians, Non-Atrians, and Winners CSV files from public folder
    */
   public static async fetchOfficialDatasets(): Promise<TeamLeaderboardRecord[]> {
     try {
-      const atriansUrl = '/team%20data/atrians/atrians.csv';
-      const nonAtriansUrl = '/team%20data/non-atrians/non-atrians.csv';
-      const nonAtriansFallbackUrl = '/team%20data/non-atrians/%20non%20atrians.csv';
-
-      let atrianRecords: TeamLeaderboardRecord[] = [];
-      let nonAtrianRecords: TeamLeaderboardRecord[] = [];
-
-      // Fetch Atrians CSV
+      // Clean legacy caches
       try {
-        const res = await fetch(atriansUrl);
-        if (res.ok) {
-          const text = await res.text();
-          atrianRecords = this.parseTeamCSV(text, 'ATRIANS');
-        }
-      } catch (err) {
-        console.warn('Failed fetching Atrians CSV', err);
+        LEGACY_STORAGE_KEYS.forEach(key => localStorage.removeItem(key));
+      } catch {}
+
+      // URLs to try (with proper encoding)
+      const winnersUrls = [
+        "/team%20data/winners/cypher%204.0%20KD's%20Garage%20-%20winners.csv",
+        '/team%20data/winners/winners.csv',
+      ];
+      const atriansUrls = [
+        "/team%20data/atrians/cypher%204.0%20KD's%20Garage%20-%20atrians.csv",
+        '/team%20data/atrians/atrians.csv',
+      ];
+      const nonAtriansUrls = [
+        "/team%20data/non-atrians/cypher%204.0%20KD's%20Garage%20-%20non%20atrians.csv",
+        '/team%20data/non-atrians/non-atrians.csv',
+      ];
+
+      // 1. Fetch Winners
+      let winnersMap = new Map<string, { rank: 1 | 2 | 3; title: string; award: string }>();
+      for (const url of winnersUrls) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const text = await res.text();
+            winnersMap = this.parseWinnersCSV(text);
+            break;
+          }
+        } catch {}
       }
 
-      // Fetch Non-Atrians CSV
-      try {
-        let res = await fetch(nonAtriansUrl);
-        if (!res.ok) {
-          res = await fetch(nonAtriansFallbackUrl);
-        }
-        if (res.ok) {
-          const text = await res.text();
-          nonAtrianRecords = this.parseTeamCSV(text, 'NON-ATRIANS');
-        }
-      } catch (err) {
-        console.warn('Failed fetching Non-Atrians CSV', err);
+      // If winners couldn't be loaded from network, use seed winners map
+      if (winnersMap.size === 0) {
+        KD_GARAGE_WINNERS.forEach(w => {
+          if (w.winnerRank) {
+            winnersMap.set(w.teamName.toLowerCase(), {
+              rank: w.winnerRank,
+              title: w.winnerTitle || "KD's Garage Winner",
+              award: w.winnerAward || 'Winner',
+            });
+          }
+        });
+      }
+
+      // 2. Fetch Atrians CSV
+      let atrianRecords: TeamLeaderboardRecord[] = [];
+      for (const url of atriansUrls) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const text = await res.text();
+            atrianRecords = this.parseTeamCSV(text, 'ATRIANS', winnersMap);
+            if (atrianRecords.length > 0) break;
+          }
+        } catch {}
+      }
+
+      // 3. Fetch Non-Atrians CSV
+      let nonAtrianRecords: TeamLeaderboardRecord[] = [];
+      for (const url of nonAtriansUrls) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const text = await res.text();
+            nonAtrianRecords = this.parseTeamCSV(text, 'NON-ATRIANS', winnersMap);
+            if (nonAtrianRecords.length > 0) break;
+          }
+        } catch {}
       }
 
       const combined = [...atrianRecords, ...nonAtrianRecords];
@@ -263,12 +328,12 @@ export class CSVEvaluationService {
       console.error('Error fetching official datasets', e);
     }
 
-    // If fetch failed, return any cached records or seed data
+    // Fallback: return verified seed leaderboard records
     return this.getCachedRecords();
   }
 
   /**
-   * Retrieve cached records from localStorage
+   * Retrieve cached records from localStorage, falling back to seed records
    */
   public static getCachedRecords(): TeamLeaderboardRecord[] {
     try {
@@ -280,7 +345,7 @@ export class CSVEvaluationService {
         }
       }
     } catch {}
-    return [];
+    return SEED_LEADERBOARD_RECORDS;
   }
 
   /**
@@ -298,13 +363,12 @@ export class CSVEvaluationService {
   }
 
   /**
-   * Import custom CSV content for testing or live updates
+   * Retrieve official KD's Garage winners
    */
-  public static importCustomCSV(csvText: string, category: 'ATRIANS' | 'NON-ATRIANS'): TeamLeaderboardRecord[] {
-    const current = this.getCachedRecords();
-    const otherCategory = current.filter(r => r.category !== category);
-    const newForCategory = this.parseTeamCSV(csvText, category);
-    const combined = [...otherCategory, ...newForCategory];
-    return this.saveRecords(combined);
+  public static getWinners(records?: TeamLeaderboardRecord[]): TeamLeaderboardRecord[] {
+    const list = records || this.getCachedRecords();
+    return list
+      .filter(r => r.isWinner)
+      .sort((a, b) => (a.winnerRank || 99) - (b.winnerRank || 99));
   }
 }
